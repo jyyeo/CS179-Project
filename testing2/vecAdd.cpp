@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include<cstdio>
+#include "vecAdd.cu"
 
 int main(void) {
 	float *input1, *input2, *output;
@@ -7,7 +8,8 @@ int main(void) {
 
 	input1 = (float*)malloc(size * sizeof(float));
 	input2 = (float*)malloc(size * sizeof(float));
-
+	output = (float*)malloc(size * sizeof(float));
+	
 	for (int i = 0; i < size; i++) {
 		input1[i] = i + 0.5;
 		input2[i] = i + 1.5;

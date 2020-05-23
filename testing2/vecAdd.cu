@@ -36,6 +36,7 @@ void cudaVecAdd (float *input1, float *input2, float *output, int size) {
 	cudaFree(dev_output);
 }
 
+/*
 int main(void) {
 	float *input1, *input2, *output;
 	int size = 10;
@@ -55,3 +56,4 @@ int main(void) {
 		printf("%f  %f\n", input1[i]+input2[i], output[i]);
 	}
 }
+*/
