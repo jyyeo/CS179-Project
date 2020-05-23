@@ -41,7 +41,7 @@ else
 	NVCCFLAGS := -m64
 endif
 
-TARGETS = test_cuda addVec
+TARGETS = test_cuda
 
 all: $(TARGETS)
 
