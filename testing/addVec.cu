@@ -1,4 +1,5 @@
 #include "addVec.cuh"
+#include <cuda_runtime.h>
 
 void cudaAddVecKernel(
 	const float *input1,
