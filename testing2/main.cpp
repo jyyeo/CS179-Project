@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "vecAdd.cuh"
 #include <cuda_runtime.h>
+
+#include "vecAdd.cuh"
 
 int main(void) {
 	float *input1, *input2, *output;
