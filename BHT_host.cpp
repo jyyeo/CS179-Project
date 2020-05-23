@@ -37,12 +37,12 @@ int main(int argc, char const *argv[]) {
         std::cout << bodies[i].rx << "   " << bodies[i].ry << std::endl;
     }
 
-    // Allocate host memory
-    float * host_bodies = array_from_body(bodies);
+    // // Allocate host memory
+    // float * host_bodies = array_from_body(bodies);
 
-    // Allocate device memory
-    float * dev_bodies;
-    CUDA_CALL(cudaMalloc ((void **) &dev_bodies, n * 7 * sizeof(float)));
+    // // Allocate device memory
+    // float * dev_bodies;
+    // CUDA_CALL(cudaMalloc ((void **) &dev_bodies, n * 7 * sizeof(float)));
     
     // gpuErrChk(cudaMemcpy(bodies))
     return 0;
