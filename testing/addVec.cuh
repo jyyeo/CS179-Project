@@ -13,3 +13,5 @@ void cudaCallAddVecKernel(const int blocks,
 	const float *input2,
 	const float *output,
 	const unsigned int size);
+
+#endif
