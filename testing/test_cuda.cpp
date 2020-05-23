@@ -14,5 +14,11 @@ int main(int argc, char const *argv[])
 		arr3[i] = 0.0;
 		printf("%f\n", arr1[i]+arr2[i]);
 	}
+	cudaCallAddVecKernel(const int 1,
+	const unsigned int 32,
+	const float arr1,
+	const float arr2,
+	float arr3,
+	const unsigned int 32) 
 	return 0;
 }
