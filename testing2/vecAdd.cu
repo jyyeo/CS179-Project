@@ -2,7 +2,7 @@
 #include "cuda_runtime.h"
 
 __global__ void vecAdd (float *input1, float *input2, float *output, int size) {
-	int tid = blockDim.x * gridDim.x + threadIdx.x;
+	int tid = blockIdx.x * blockDim.x + threadIdx.x;
 	while (tid < size) {
 		output[tid] = input1[tid] +input2[tid];
 		tid += blockDim.x * gridDim.x;
@@ -12,7 +12,7 @@ __global__ void vecAdd (float *input1, float *input2, float *output, int size) {
 void cudaVecAdd (float *input1, float *input2, float *output, int size) {
 	float* dev_input1;
 	float* dev_input2;
-	float* dec_input3;
+	float* dev_output;
 
 	cudaMalloc((void**)&dev_input1, size * sizeof(float));
 	cudaMalloc((void**)&dev_input2, size * sizeof(float));
@@ -22,6 +22,12 @@ void cudaVecAdd (float *input1, float *input2, float *output, int size) {
 	cudaMemcpy(dev_input2, input2, size * sizeof(float), cudaMemcpyHostToDevice);
 
 	vecAdd<<<1, size>>>(dev_input1, dev_input2, dev_output, size);
+	/*
+	for (int i = 0; i < size; i++) {
+	    printf("%f\n",dev_output[i]);
+	}*/
+
+	cudaDeviceSynchronize();
 
 	cudaMemcpy(output, dev_output, size * sizeof(float), cudaMemcpyDeviceToHost);
 
@@ -36,7 +42,8 @@ int main(void) {
 
 	input1 = (float*)malloc(size * sizeof(float));
 	input2 = (float*)malloc(size * sizeof(float));
-
+	output = (float*)malloc(size * sizeof(float));
+	
 	for (int i = 0; i < size; i++) {
 		input1[i] = i + 0.5;
 		input2[i] = i + 1.5;
