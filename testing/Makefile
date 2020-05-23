@@ -40,7 +40,7 @@ ifeq ($(OS_SIZE),32)
 else
 	NVCCFLAGS := -m64
 endif
-NVCC_FLAGS += -g -dc -Wno-deprecated-gpu-targets --std=c++11 \
+NVCCFLAGS += -g -dc -Wno-deprecated-gpu-targets --std=c++11 \
              --expt-relaxed-constexpr
 
 CUDA_LINK_FLAGS = -dlink -Wno-deprecated-gpu-targets
@@ -53,4 +53,4 @@ test_cuda: test_cuda.cpp addVec.o
 	$(CC) $^ -o $@ -O3 $(LDFLAGS) -Wall -I$(CUDA_INC_PATH)
 
 addVec.o: addVec.cu
-	$(NVCC) $(NVCCFLAGS) -O3 $(EXTRA_NVCCFLAGS) $(GENCODE_FLAGS) -I$(CUDA_INC_PATH) -o $@ -c $<
+	$(NVCC) $(CUDA_LINK_FLAGS) $(NVCCFLAGS) -O3 $(EXTRA_NVCCFLAGS) $(GENCODE_FLAGS) -I$(CUDA_INC_PATH) -o $@ -c $<
