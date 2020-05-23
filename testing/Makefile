@@ -40,6 +40,10 @@ ifeq ($(OS_SIZE),32)
 else
 	NVCCFLAGS := -m64
 endif
+NVCC_FLAGS += -g -dc -Wno-deprecated-gpu-targets --std=c++11 \
+             --expt-relaxed-constexpr
+
+CUDA_LINK_FLAGS = -dlink -Wno-deprecated-gpu-targets
 
 TARGETS = test_cuda
 
