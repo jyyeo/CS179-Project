@@ -1,6 +1,7 @@
 #include "addVec.cuh"
 #include <cuda_runtime.h>
 
+__global__
 void cudaAddVecKernel(
 	const float *input1,
 	const float *input2,
