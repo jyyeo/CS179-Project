@@ -41,9 +41,12 @@ else
 	NVCCFLAGS := -m64
 endif
 
-TARGETS = test_cuda
+TARGETS = test_cuda addVec
 
 all: $(TARGETS)
 
-test_cuda: test_cuda.cpp
+test_cuda: test_cuda.cpp addVec.o
 	$(CC) $^ -o $@ -O3 $(LDFLAGS) -Wall -I$(CUDA_INC_PATH)
+
+addVec.o: addVec.cu
+	$(NVCC) $(NVCCFLAGS) -O3 $(EXTRA_NVCCFLAGS) $(GENCODE_FLAGS) -I$(CUDA_INC_PATH) -o $@ -c $<
