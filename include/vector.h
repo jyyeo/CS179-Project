@@ -18,8 +18,8 @@ double vec_mag(vector_t v1);
 
 double vec_distance(vector_t v1, vector_t v2);
 
-bool same_vec(vector_t v1, vector_t v2);
+bool vec_same(vector_t v1, vector_t v2);
 
-vector_t normalize(vector_t v1);
+vector_t vec_norm(vector_t v1);
 
 #endif

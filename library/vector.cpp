@@ -29,7 +29,7 @@ double vec_distance(vector_t v1, vector_t v2) {
 	return vec_mag(vec_subtract(v1, v2));
 }
 
-bool same_vec(vector_t v1, vector_t v2) {
+bool vec_same(vector_t v1, vector_t v2) {
 	if ((v1.x == v2.x) && (v1.y == v2.y)) {
 		return true;
 	}
@@ -37,5 +37,6 @@ bool same_vec(vector_t v1, vector_t v2) {
 }
 
 vector_t vec_norm(vector_t v1) {
-	return (v1.x/vec_mag(v1), v1.y/vec_mag(v1));
+	vector_t output = { v1.x/vec_mag(v1), v1.y/vec_mag(v1) };
+	return output;
 }

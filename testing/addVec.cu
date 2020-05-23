@@ -4,7 +4,7 @@
 void cudaAddVecKernel(
 	const float *input1,
 	const float *input2,
-	const float *output,
+	float *output,
 	const unsigned int size) 
 {
 	uint thread_index = blockIdx.x * blockDim.x + threadIdx.x;
@@ -18,8 +18,8 @@ void cudaCallAddVecKernel(const int blocks,
 	const unsigned int threadsPerBlock,
 	const float *input1,
 	const float *input2,
-	const float *output,
+	float *output,
 	const unsigned int size) 
 {
-	cudaAddVecKernel<<<blocks, threadsPerBlock>>>(input1, input2, size);
+	cudaAddVecKernel<<<blocks, threadsPerBlock>>>(input1, input2, output, size);
 }

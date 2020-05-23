@@ -4,8 +4,8 @@
 struct Body;
 struct Quad;
 struct BHTree;
-
 struct Body {
+
     double rx, ry;
     double vx, vy;
     double fx, fy;
