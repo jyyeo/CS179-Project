@@ -41,7 +41,7 @@ else
 	NVCCFLAGS := -m64
 endif
 
-TARGETS = transpose
+TARGETS = test_cuda
 
 all: $(TARGETS)
 
