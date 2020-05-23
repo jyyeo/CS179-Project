@@ -1,4 +1,4 @@
-#include "cudaAddVecKernel.cuh"
+#include "addVec.cuh"
 
 void cudaAddVecKernel(
 	const float *input1,
