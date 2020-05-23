@@ -50,3 +50,6 @@ test_cuda: test_cuda.cpp addVec.o
 
 addVec.o: addVec.cu
 	$(NVCC) $(NVCCFLAGS) -O3 $(EXTRA_NVCCFLAGS) $(GENCODE_FLAGS) -I$(CUDA_INC_PATH) -o $@ -c $<
+
+clean:
+	rm *.o $(TARGET)
