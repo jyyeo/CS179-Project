@@ -75,10 +75,10 @@ int	main(int argc, char const *argv[])
 
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
-				// printf("%f %f %f %f %f\n", get_position(bodies[i]).x, get_position(bodies[i]).y, get_velocity(bodies[i]).x, get_velocity(bodies[i]).y, get_mass(bodies[i]));
-				// printf("%f %f %f %f %f\n", get_position(bodies[j]).x, get_position(bodies[j]).y, get_velocity(bodies[j]).x, get_velocity(bodies[j]).y, get_mass(bodies[j]));
+				printf("%f %f %f %f %f\n", get_position(bodies[i]).x, get_position(bodies[i]).y, get_velocity(bodies[i]).x, get_velocity(bodies[i]).y, get_mass(bodies[i]));
+				printf("%f %f %f %f %f\n", get_position(bodies[j]).x, get_position(bodies[j]).y, get_velocity(bodies[j]).x, get_velocity(bodies[j]).y, get_mass(bodies[j]));
 				vector_t total_acc = acc_on(bodies[i], bodies[j]);
-				// printf("%f %f\n", total_acc.x, total_acc.y);
+				printf("%f %f\n", total_acc.x, total_acc.y);
 				acc[i].x += total_acc.x;
 				acc[i].y += total_acc.y;
 				// printf("%f %f\n", acc[i].x, acc[i].y);
@@ -102,7 +102,7 @@ int	main(int argc, char const *argv[])
 			float_arr[4] = to_string(get_mass(bodies[i]));
 			
 			string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3] + " " + float_arr[4];
-			cout << output_line << "\n";
+			// cout << output_line << "\n";
 			output_file << output_line << "\n";
 		}
 		output_file << "\n";
