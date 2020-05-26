@@ -3,7 +3,7 @@
 
 #include "stdio.h"
 
-kg get_mass(Body b) {
+float get_mass(Body b) {
 	return b.mass;
 }
 
@@ -15,7 +15,7 @@ vector_t get_velocity(Body b) {
 	return b.velocity;
 }
 
-vector_t acc_on_point(vector_t p1, kg mass, vector_t p2) {
+vector_t acc_on_point(vector_t p1, float mass, vector_t p2) {
 	if (vec_same(p1,p2)) {
 		vector_t output = {0.0, 0.0};
 		return output;

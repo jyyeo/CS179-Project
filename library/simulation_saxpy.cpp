@@ -57,7 +57,7 @@ int	main(int argc, char const *argv[])
 
 		vector_t position = {num[0], num[1]};
 		vector_t velocity = {num[2], num[3]};
-		kg mass = num[4];
+		float mass = num[4];
 		bodies[i].position = position;
 		bodies[i].velocity = velocity;
 		bodies[i].mass = mass;
