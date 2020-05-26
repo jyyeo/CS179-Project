@@ -81,8 +81,10 @@ int	main(int argc, char const *argv[])
 		
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
-				printf("%f %f %f %f %f\n", get_position(bodies[i]).x, get_position(bodies[i]).y, get_velocity(bodies[i]).x, get_velocity(bodies[i]).y, get_mass(bodies[i]));
-				printf("%f %f %f %f %f\n", get_position(bodies[j]).x, get_position(bodies[j]).y, get_velocity(bodies[j]).x, get_velocity(bodies[j]).y, get_mass(bodies[j]));
+				printf("%f %f %f %f %s\n", get_position(bodies[i]).x, get_position(bodies[i]).y, 
+					get_velocity(bodies[i]).x, get_velocity(bodies[i]).y, to_string(get_mass(bodies[i])));
+				printf("%f %f %f %f %s\n", get_position(bodies[j]).x, get_position(bodies[j]).y, 
+					get_velocity(bodies[j]).x, get_velocity(bodies[j]).y, to_string(get_mass(bodies[i])));
 				vector_t total_acc = acc_on(bodies[i], bodies[j]);
 				printf("%f %f\n", total_acc.x, total_acc.y);
 				acc_x[i] += total_acc.x;
