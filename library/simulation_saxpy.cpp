@@ -69,9 +69,13 @@ int	main(int argc, char const *argv[])
 
 	for (int t = 0; t < 1; t++) {
 		// calculate acceleration on each body, update position and velocity
-		vector_t acc[n];
 		float acc_x[n];
 		float acc_y[n];
+		for (int i = 0; i < n; i++) {
+			acc_x[i] = 0.0;
+			acc_y[i] = 0.0;
+		}
+		
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
 				vector_t total_acc = acc_on(bodies[i], bodies[j]);
