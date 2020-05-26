@@ -69,15 +69,20 @@ int	main(int argc, char const *argv[])
 
 	for (int t = 0; t < 1; t++) {
 		// calculate acceleration on each body, update position and velocity
+		// vector_t acc[n];
 		float acc_x[n];
 		float acc_y[n];
 		for (int i = 0; i < n; i++) {
 			acc_x[i] = 0.0;
 			acc_y[i] = 0.0;
+			// acc[i].x = 0.0;
+			// acc[i].y = 0.0;
 		}
 		
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
+				printf("%f %f %f %f %f\n", get_position(bodies[i]).x, get_position(bodies[i]).y, get_velocity(bodies[i]).x, get_velocity(bodies[i]).y, get_mass(bodies[i]));
+				printf("%f %f %f %f %f\n", get_position(bodies[j]).x, get_position(bodies[j]).y, get_velocity(bodies[j]).x, get_velocity(bodies[j]).y, get_mass(bodies[j]));
 				vector_t total_acc = acc_on(bodies[i], bodies[j]);
 				printf("%f %f\n", total_acc.x, total_acc.y);
 				acc_x[i] += total_acc.x;
