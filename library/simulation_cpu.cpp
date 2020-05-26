@@ -84,7 +84,9 @@ int	main(int argc, char const *argv[])
 				printf("%f %f\n", acc[i].x, acc[i].y);
 			}
 			printf("debug: %f %f\n", acc[i].x, acc[i].y);
-			
+		}
+
+		for (int i = 0; i < n; i++) {
 			updateBody(bodies[i], acc[i], timestep);
 			// printf("velocity: %f %f\n", (bodies[i].velocity).x, (bodies[i].velocity).y);
 			// printf("position: %f %f\n", (bodies[i].position).x, (bodies[i].position).y);
