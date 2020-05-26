@@ -78,12 +78,13 @@ int	main(int argc, char const *argv[])
 				vector_t total_acc = acc_on(bodies[i], bodies[j]);
 				acc[i].x += total_acc.x;
 				acc[i].y += total_acc.y;
+				printf("%f %f\n", acc[i].x, acc[i].y);
 			}
-			printf("%f %f\n", acc[i].x, acc[i].y);
+			printf("debug: %f %f\n", acc[i].x, acc[i].y);
 			
 			updateBody(bodies[i], acc[i], timestep);
-			printf("velocity: %f %f\n", (bodies[i].velocity).x, (bodies[i].velocity).y);
-			printf("position: %f %f\n", (bodies[i].position).x, (bodies[i].position).y);
+			// printf("velocity: %f %f\n", (bodies[i].velocity).x, (bodies[i].velocity).y);
+			// printf("position: %f %f\n", (bodies[i].position).x, (bodies[i].position).y);
 		}
 
 		// output to txt file

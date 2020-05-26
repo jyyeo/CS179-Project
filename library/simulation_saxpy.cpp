@@ -81,6 +81,7 @@ int	main(int argc, char const *argv[])
 				vector_t total_acc = acc_on(bodies[i], bodies[j]);
 				acc_x[i] += total_acc.x;
 				acc_y[i] += total_acc.y;
+				printf("%f %f\n", acc_x[i], acc_y[i]);
 			}
 			printf("Debug: %f %f\n", acc_x[i], acc_y[i]);
 		}
