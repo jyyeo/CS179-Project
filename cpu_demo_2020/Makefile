@@ -13,10 +13,11 @@ OBJS = $(addprefix out/,$(LIBS:=.o))
 C_LIBS = saxpy
 C_OBJS = $(addprefix out/,$(C_LIBS:=.o))
 
-all: cpu gpu
+#all: cpu gpu
+all : cpu
 
-gpu: $(OBJS) $(C_OBJS) library/simulation_saxpy.cpp
-	$(CC) -o bins/gpu_run $^ $(CFLAGS) $(CPPFLAGS)
+#gpu: $(OBJS) $(C_OBJS) library/simulation_saxpy.cpp
+#	$(CC) -o bins/gpu_run $^ $(CFLAGS) $(CPPFLAGS)
 
 cpu: out/mechanics.o out/vector.o library/simulation_cpu.cpp
 	$(CC) -o bins/cpu_run $^ $(CPPFLAGS)
@@ -33,8 +34,9 @@ clean:
 	rm -f out/* bin/*
 
 test: bins/gpu_run bins/cpu_run
-	./bins/gpu_run test_cases/test2.txt
-	echo "\n"
+#	./bins/gpu_run test_cases/test2.txt
+#	echo "\n"
 	./bins/cpu_run test_cases/test2.txt
 
-.PHONY: all clean gpu cpu
+#.PHONY: all clean gpu cpu
+.PHONY: all clean cpu	
