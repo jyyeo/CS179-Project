@@ -69,9 +69,13 @@ int	main(int argc, char const *argv[])
 
 	for (int t = 0; t < 1; t++) {
 		// calculate acceleration on each body, update position and velocity
-		vector_t acc[n];
 		float acc_x[n];
 		float acc_y[n];
+		for (int i = 0; i < n; i++) {
+			acc_x[i] = 0.0;
+			acc_y[i] = 0.0;
+		}
+		
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
 				vector_t total_acc = acc_on(bodies[i], bodies[j]);
@@ -102,6 +106,8 @@ int	main(int argc, char const *argv[])
 		// v_new = v + at, x_new = x + vt
 		cudaSaxpy(timestep, acc_x, velocity_x, n);
 		cudaSaxpy(timestep, velocity_x, position_x, n);
+		cudaSaxpy(timestep, acc_y, velocity_y, n);
+		cudaSaxpy(timestep, velocity_y, position_y, n);
 		for (int i = 0; i < n; i++) {
 			printf("%f ", position_x[i]);
 		}
@@ -113,19 +119,18 @@ int	main(int argc, char const *argv[])
 		free(velocity_x);
 		free(velocity_y);
 
-		// // output to txt file
-		// for (int i = 0; i < n; i++) {
-		// 	string float_arr[5];
-		// 	float_arr[0] = to_string(get_position(bodies[i]).x);
-		// 	float_arr[1] = to_string(get_position(bodies[i]).y);
-		// 	float_arr[2] = to_string(get_velocity(bodies[i]).x);
-		// 	float_arr[3] = to_string(get_velocity(bodies[i]).y);
-		// 	float_arr[4] = to_string(get_mass(bodies[i]));
-			
-		// 	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3] + " " + float_arr[4];
+		 // output to txt file
+		 for (int i = 0; i < n; i++) {
+		 	string float_arr[5];
+		 	float_arr[0] = to_string(get_position(bodies[i]).x);
+		 	float_arr[1] = to_string(get_position(bodies[i]).y);
+		 	float_arr[2] = to_string(get_velocity(bodies[i]).x);
+		 	float_arr[3] = to_string(get_velocity(bodies[i]).y);
+		 	float_arr[4] = to_string(get_mass(bodies[i]));
+		 	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3] + " " + float_arr[4];
 		// 	cout << output_line << "\n";
 		// 	output_file << output_line << "\n";
-		// }
+		 }
 		output_file << "\n";
 	}	
 	output_file.close();
