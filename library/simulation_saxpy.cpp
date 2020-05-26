@@ -128,7 +128,7 @@ int	main(int argc, char const *argv[])
 		 	float_arr[3] = to_string(get_velocity(bodies[i]).y);
 		 	float_arr[4] = to_string(get_mass(bodies[i]));
 		 	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3] + " " + float_arr[4];
-		// 	cout << output_line << "\n";
+		 	cout << output_line << "\n";
 		// 	output_file << output_line << "\n";
 		 }
 		output_file << "\n";
