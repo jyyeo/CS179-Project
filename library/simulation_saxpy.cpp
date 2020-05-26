@@ -97,10 +97,10 @@ int	main(int argc, char const *argv[])
 		extract_position_y (bodies, n, position_y);
 		extract_velocity_x (bodies, n, velocity_x);
 		extract_velocity_y (bodies, n, velocity_y);
-		// for (int i = 0; i < n; i++) {
-		// 	printf("%f ", position_x[i]);
-		// }
-		// printf("\n");
+		for (int i = 0; i < n; i++) {
+			printf("%f ", position_x[i]);
+		}
+		printf("\n");
 
 		// cuda calls
 		// v_new = v + at, x_new = x + vt
