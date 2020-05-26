@@ -83,7 +83,7 @@ int	main(int argc, char const *argv[])
 				printf("%f %f\n", total_acc.x, total_acc.y);
 				acc[i].x += total_acc.x;
 				acc[i].y += total_acc.y;
-				// printf("%f %f\n", acc[i].x, acc[i].y);
+				printf("%f %f\n", acc[i].x, acc[i].y);
 			}
 			// printf("debug: %f %f\n", acc[i].x, acc[i].y);
 		}
