@@ -52,8 +52,6 @@ int	main(int argc, char const *argv[])
 			lineStream >> num[j];
 		}
 
-		// printf("%f %f %f %f %f\n", num[0], num[1], num[2], num[3], num[4]);
-
 		vector_t position = {num[0], num[1]};
 		vector_t velocity = {num[2], num[3]};
 		kg mass = num[4];
