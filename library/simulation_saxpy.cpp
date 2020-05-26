@@ -144,7 +144,8 @@ int	main(int argc, char const *argv[])
 		 	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3] + " " + float_arr[4];
 		 	// cout << output_line << "\n";
 		// 	output_file << output_line << "\n";
-		 }
+		}
+		printf("time step 1 \n\n");
 		output_file << "\n";
 	}	
 	output_file.close();

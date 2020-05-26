@@ -105,6 +105,7 @@ int	main(int argc, char const *argv[])
 			// cout << output_line << "\n";
 			output_file << output_line << "\n";
 		}
+		printf("time step 1 \n\n");
 		output_file << "\n";
 	}	
 	output_file.close();
