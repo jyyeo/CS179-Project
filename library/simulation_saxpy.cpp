@@ -67,7 +67,7 @@ int	main(int argc, char const *argv[])
 	ofstream output_file;
 	output_file.open("output.txt");
 
-	for (int t = 0; t < timestep; t++) {
+	for (int t = 0; t < 2; t++) {
 		// calculate acceleration on each body, update position and velocity
 		// vector_t acc[n];
 		float acc_x[n];
