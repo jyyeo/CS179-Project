@@ -1,7 +1,7 @@
 #include "vector.h"
 
-// const double G = 6.673e-11;
-const double G = 1;
+// const float G = 6.673e-11;
+const float G = 1.0;
 
 typedef unsigned int kg;
 

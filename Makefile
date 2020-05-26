@@ -1,4 +1,4 @@
-CC = /usr/bin/g++
+CC = g++
 CPPFLAGS = -Iinclude -Wall
 
 CUDA_PATH       ?= /usr/local/cuda

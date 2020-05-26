@@ -21,7 +21,7 @@ vector_t acc_on_point(vector_t p1, kg mass, vector_t p2) {
 		return output;
 	}
 	else {
-		double r = vec_distance(p1, p2);
+		float r = vec_distance(p1, p2);
 		vector_t dir = vec_norm(vec_subtract(p2,p1));
 		return vec_multiply(G * mass / (r * r + 1), dir);
 	}
