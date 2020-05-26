@@ -79,6 +79,7 @@ int	main(int argc, char const *argv[])
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
 				vector_t total_acc = acc_on(bodies[i], bodies[j]);
+				printf("%f %f\n", total_acc.x, total_acc.y);
 				acc_x[i] += total_acc.x;
 				acc_y[i] += total_acc.y;
 				printf("%f %f\n", acc_x[i], acc_y[i]);
@@ -99,10 +100,10 @@ int	main(int argc, char const *argv[])
 		extract_position_y (bodies, n, position_y);
 		extract_velocity_x (bodies, n, velocity_x);
 		extract_velocity_y (bodies, n, velocity_y);
-		for (int i = 0; i < n; i++) {
-			printf("%f ", position_x[i]);
-		}
-		printf("\n");
+		// for (int i = 0; i < n; i++) {
+		// 	printf("%f ", position_x[i]);
+		// }
+		// printf("\n");
 
 		// cuda calls
 		// v_new = v + at, x_new = x + vt
@@ -110,10 +111,10 @@ int	main(int argc, char const *argv[])
 		cudaSaxpy(timestep, velocity_x, position_x, n);
 		cudaSaxpy(timestep, acc_y, velocity_y, n);
 		cudaSaxpy(timestep, velocity_y, position_y, n);
-		for (int i = 0; i < n; i++) {
-			printf("%f ", position_x[i]);
-		}
-		printf("\n");
+		// for (int i = 0; i < n; i++) {
+		// 	printf("%f ", position_x[i]);
+		// }
+		// printf("\n");
 
 		reverse_position_x (bodies, n, position_x);
 		reverse_position_y (bodies, n, position_y);
