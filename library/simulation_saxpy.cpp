@@ -101,13 +101,17 @@ int	main(int argc, char const *argv[])
 		// cuda calls
 		// v_new = v + at, x_new = x + vt
 		cudaSaxpy(timestep, acc_x, velocity_x, n);
+		cudaSaxpy(timestep, velocity_x, position_x, n);
 		for (int i = 0; i < n; i++) {
-			printf("%f ", velocity_x[i]);
+			printf("%f ", position_x[i]);
 		}
 		printf("\n");
 
 
 		free(position_x);
+		free(position_y);
+		free(velocity_x);
+		free(velocity_y);
 
 		// // output to txt file
 		// for (int i = 0; i < n; i++) {
