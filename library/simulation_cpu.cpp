@@ -76,12 +76,11 @@ int	main(int argc, char const *argv[])
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
 				vector_t total_acc = acc_on(bodies[i], bodies[j]);
-				// printf("Debug: %f %f\n", total_acc.x, total_acc.y);
 				acc[i].x += total_acc.x;
 				acc[i].y += total_acc.y;
 			}
-
 			printf("%f %f\n", acc[i].x, acc[i].y);
+			
 			updateBody(bodies[i], acc[i], timestep);
 			printf("velocity: %f %f\n", (bodies[i].velocity).x, (bodies[i].velocity).y);
 			printf("position: %f %f\n", (bodies[i].position).x, (bodies[i].position).y);

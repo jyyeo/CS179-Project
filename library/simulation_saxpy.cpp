@@ -82,6 +82,7 @@ int	main(int argc, char const *argv[])
 				acc_x[i] += total_acc.x;
 				acc_y[i] += total_acc.y;
 			}
+			printf("Debug: %f %f\n", total_acc.x, total_acc.y);
 		}
 		
 		// organize data for GPU
