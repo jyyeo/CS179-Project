@@ -9,10 +9,10 @@
 #include <sstream>
 #include <cuda_runtime.h>
 
-#include "../include/vector.h"
-#include "../include/mechanics.h"
-#include "../include/data.h"
-#include "../include/saxpy.cuh"
+#include "vector.h"
+#include "mechanics.h"
+#include "data.h"
+#include "saxpy.cuh"
 
 using std::cerr;
 using std::string;

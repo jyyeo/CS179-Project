@@ -13,20 +13,23 @@ OBJS = $(addprefix out/,$(LIBS:=.o))
 C_LIBS = saxpy
 C_OBJS = $(addprefix out/,$(C_LIBS:=.o))
 
-all: main
+all: cpu gpu
 
-main: $(OBJS) $(C_OBJS) library/main.cpp 
-	$(CC) -o bins/main $^ $(CFLAGS) $(CPPFLAGS)
+gpu: $(OBJS) $(C_OBJS) library/simulation_saxpy.cpp
+	$(CC) -o bins/gpu_run $^ $(CFLAGS) $(CPPFLAGS)
+
+cpu: out/mechanics.o out/vector.o library/simulation_cpu.cpp
+	$(CC) -o bins/cpu_run $^ $(CPPFLAGS)
 
 libs: $(OBJS)
 
 out/%.o: library/%.cpp
-	$(CC) -c $(CPPFLAGS) $(CFLAGS) $^ -o $@
+	$(CC) -c $(CPPFLAGS) -I$(CUDA_INC_PATH) $^ -o $@
 
 out/%.o: library/%.cu
-	nvcc -c $^ -o $@
+	nvcc -c $^ -o $@ -Iinclude
 
 clean:
 	rm -f out/* bin/*
 
-.PHONY: all clean
+.PHONY: all clean gpu cpu

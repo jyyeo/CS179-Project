@@ -8,8 +8,8 @@
 #include <stdio.h>
 #include <sstream>
 
-#include "../include/vector.h"
-#include "../include/mechanics.h"
+#include "vector.h"
+#include "mechanics.h"
 
 using std::cerr;
 using std::string;

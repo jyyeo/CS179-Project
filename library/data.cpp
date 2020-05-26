@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <cstdio>
 
-#include "../include/vector.h"
-#include "../include/mechanics.h"
-#include "../include/data.h"
+#include "vector.h"
+#include "mechanics.h"
+#include "data.h"
 
 void extract_position_x (Body bodies[], int n, float *position_x) {
 	for (int i = 0; i < n; i++) {

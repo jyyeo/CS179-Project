@@ -1,5 +1,5 @@
 #include <math.h>
-#include "../include/vector.h"
+#include "vector.h"
 
 vector_t vec_add(vector_t v1, vector_t v2) {
     vector_t output = {v1.x + v2.x, v1.y + v2.y};

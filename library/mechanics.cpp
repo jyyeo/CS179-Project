@@ -1,5 +1,5 @@
-#include "../include/vector.h"
-#include "../include/mechanics.h"
+#include "vector.h"
+#include "mechanics.h"
 
 #include "stdio.h"
 
