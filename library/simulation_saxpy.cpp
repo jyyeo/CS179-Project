@@ -113,6 +113,10 @@ int	main(int argc, char const *argv[])
 		}
 		printf("\n");
 
+		reverse_position_x (bodies, n, position_x);
+		reverse_position_y (bodies, n, position_y);
+		reverse_velocity_x (bodies, n, velocity_x);
+		reverse_velocity_y (bodies, n, velocity_y);
 
 		free(position_x);
 		free(position_y);
