@@ -7,6 +7,7 @@
 #include <cstdio>
 #include <stdio.h>
 #include <sstream>
+#include <cuda_runtime.h>
 
 #include "../include/vector.h"
 #include "../include/mechanics.h"
