@@ -15,7 +15,7 @@ C_OBJS = $(addprefix out/,$(C_LIBS:=.o))
 
 all: main
 
-main: $(OBJS) $(C_OBJS) library/main.cpp 
+main: $(OBJS) $(C_OBJS) library/simulation_saxpy.cpp 
 	$(CC) -o bins/main $^ $(CFLAGS) $(CPPFLAGS)
 
 libs: $(OBJS)
