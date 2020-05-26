@@ -1,8 +1,7 @@
 #include "cuda_runtime.h"
-#include "saxpy.cuh"
+#include "../include/saxpy.cuh"
 
-__global__ 
-void saxpy (float a, float *x, float *y, int size) {
+__global__ void saxpy (float a, float *x, float *y, int size) {
 	int i = blockIdx.x * blockDim.x + threadIdx.x;
 	if (i < size) {
 		y[i] = a * x[i] + y[i];
