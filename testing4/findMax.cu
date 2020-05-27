@@ -1,5 +1,5 @@
 #include <cstdio>
-#include <cstdlib>
+#include <stdlib.h>
 #include "cuda_runtime.h"
 #include "findMax.cuh"
 
