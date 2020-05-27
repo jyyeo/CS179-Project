@@ -19,25 +19,25 @@ __global__ void findMax(float *dev_arr, int size, float *dev_output) {
 	extern __shared__ float shmem[];
 	int tid = threadIdx.x;
 	int i = blockIdx.x * blockDim.x + threadIdx.x;
-	if (i < size) {
+	while (i < size) {
 		shmem[tid] = dev_arr[i];
-	}
 
-	__syncthreads();
-
-	for (int s = blockDim.x; s > 1; s >>= 1) {
-		if (tid < s && i < size) {
-			if (shmem[tid] < shmem[tid + s]) {
-				shmem[tid] = shmem[tid + s];
-			}
-		}
 		__syncthreads();
-	}
 
-	if (tid == 0) {
-		atomicMax(dev_output,shmem[0]);
+		for (int s = blockDim.x; s > 1; s >>= 1) {
+			if (tid < s && i < size) {
+				if (shmem[tid] < shmem[tid + s]) {
+					shmem[tid] = shmem[tid + s];
+				}
+			}
+			__syncthreads();
+		}
+
+		if (tid == 0) {
+			atomicMax(dev_output,shmem[0]);
+		}
+		i += blockDim.x * gridDim.x;
 	}
-	i += blockDim.x * gridDim.x;
 }
 
 void cudaFindMax(float *arr, int size, float *output) {
