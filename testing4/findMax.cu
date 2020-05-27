@@ -48,7 +48,8 @@ void cudaFindMax(float *arr, int size, float *output) {
 	cudaMalloc((void**)&dev_output, 1 * sizeof(float));
 
 	cudaMemcpy(dev_arr, arr, size * sizeof(float), cudaMemcpyHostToDevice);
-
+	cudaMemset(dev_output, 0, sizeof(float));
+	
 	findMax<<<1, size>>>(dev_arr, size, dev_output);
 
 	//std::cout << dev_output[0] << std::endl;
