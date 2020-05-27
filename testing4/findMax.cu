@@ -4,6 +4,17 @@
 #include "cuda_runtime.h"
 #include "findMax.cuh"
 
+__device__ static float atomicMax(float* address, float val) {
+    int* address_as_i = (int*) address;
+    int old = *address_as_i, assumed;
+    do {
+        assumed = old;
+        old = ::atomicCAS(address_as_i, assumed,
+            __float_as_int(::fmaxf(val, __int_as_float(assumed))));
+    } while (assumed != old);
+    return __int_as_float(old);
+}
+
 __global__ void findMax(float *dev_arr, int size, float *dev_output) {
 	extern __shared__ float shmem[];
 	int tid = threadIdx.x;
@@ -14,17 +25,19 @@ __global__ void findMax(float *dev_arr, int size, float *dev_output) {
 
 	__syncthreads();
 
-	for (int s = blockDim.x / 2; s > 0; s >>= 1) {
+	for (int s = blockDim.x; s > 1; s >>= 1) {
 		if (tid < s && i < size) {
-			shmem[tid] = fmaxf (shmem[tid],shmem[tid + s]);
+			if (shmem[tid] < shmem[tid + s]) {
+				shmem[tid] = shmem[tid + s];
+			}
 		}
+		__syncthreads();
 	}
-
-	__syncthreads();
 
 	if (tid == 0) {
-		dev_output[blockIdx.x] = shmem[tid];
+		atomicMax(dev_output,shmem[0]);
 	}
+	i += blockDim.x * gridDim.x;
 }
 
 void cudaFindMax(float *arr, int size, float *output) {
@@ -32,7 +45,7 @@ void cudaFindMax(float *arr, int size, float *output) {
 	float *dev_output;
 
 	cudaMalloc((void**)&dev_arr, size * sizeof(float));
-	cudaMalloc((void**)&dev_output, size * sizeof(float));
+	cudaMalloc((void**)&dev_output, 1 * sizeof(float));
 
 	cudaMemcpy(dev_arr, arr, size * sizeof(float), cudaMemcpyHostToDevice);
 
