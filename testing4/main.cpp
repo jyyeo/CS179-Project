@@ -18,6 +18,7 @@ int main(void) {
 	printf("\n");
  	
  	cudaFindMax(arr, size, output);
+ 	printf("completed\n");
 
  	printf("%f\n", output[0]);
  }
