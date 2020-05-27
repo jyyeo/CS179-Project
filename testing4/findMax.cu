@@ -5,8 +5,9 @@ __global__ void findMax(float *dev_arr, int size, float *dev_output) {
 	extern __shared__ float shmem[];
 	int tid = threadIdx.x;
 	int i = blockIdx.x * blockDim.x + threadIdx.x;
-
-	shmem[tid] = dev_arr[i];
+	if (i < size) {
+		shmem[tid] = dev_arr[i];
+	}
 
 	__syncthreads();
 
