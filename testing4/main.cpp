@@ -25,4 +25,7 @@ int main(void) {
 		printf("%f\n", output[0]);
 	}
 	printf("\n");
+
+	free(arr);
+	free(output);
  }
