@@ -10,6 +10,7 @@ int main(void) {
 	float *output;
 
 	arr = (float*)malloc(size * sizeof(float));
+	output = (float*)malloc(size * sizeof(float));
 
 	for (int i = 0; i < size; i++) {
 		arr[i] = i * 1.5;
