@@ -13,6 +13,7 @@
 #include "mechanics.h"
 #include "data.h"
 #include "saxpy.cuh"
+#include "bbox.h"
 
 using std::cerr;
 using std::string;
@@ -68,30 +69,46 @@ int	main(int argc, char const *argv[])
 	output_file.open("output.txt");
 
 	for (int t = 0; t < timestep; t++) {
+
+		// calculate bounding boxes for each body
+		Bbbox boxes[n];
+		float min_x = get_min_x(bodies, n);
+		float max_x = get_max_x(bodies, n);
+		float min_y = get_min_y(bodies, n);
+		float max_y = get_max_y(bodies, n);
+
+		for (int i = 0; i < n; i++) {
+			boxes[i].bl = {min_x, min_y};
+			boxes[i].tr = {max_x, max_y};
+		}
+
+		float centre_x = get_centre_x(min_x, max_x);
+		float centre_y = get_centre_y(min_y, max_y);
+		
+		for (int i = 0; i < n; i++) {
+			float x = get_position(bodies[i]).x;
+			float y = get_position(bodies[i]).y;
+			while (x < get_min_x(boxes[i]) || x > get_max_x(boxes[i]) ||
+				   y < get_min_y(boxes[i]) || y > get_max_y(boxes[i])) {
+				if (x < get_min_x(boxes[i])) {
+
+				}
+			}
+		}
 		// calculate acceleration on each body, update position and velocity
-		// vector_t acc[n];
 		float acc_x[n];
 		float acc_y[n];
 		for (int i = 0; i < n; i++) {
 			acc_x[i] = 0.0;
 			acc_y[i] = 0.0;
-			// acc[i].x = 0.0;
-			// acc[i].y = 0.0;
 		}
 		
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
-				printf("%f %f %f %f %f\n", get_position(bodies[i]).x, get_position(bodies[i]).y, 
-					get_velocity(bodies[i]).x, get_velocity(bodies[i]).y, get_mass(bodies[i]));
-				printf("%f %f %f %f %f\n", get_position(bodies[j]).x, get_position(bodies[j]).y, 
-					get_velocity(bodies[j]).x, get_velocity(bodies[j]).y, get_mass(bodies[j]));
 				vector_t total_acc = acc_on(bodies[i], bodies[j]);
-				printf("%f %f\n", total_acc.x, total_acc.y);
 				acc_x[i] += total_acc.x;
 				acc_y[i] += total_acc.y;
-				printf("%f %f\n", acc_x[i], acc_y[i]);
 			}
-			// printf("Debug: %f %f\n", acc_x[i], acc_y[i]);
 		}
 		
 		// organize data for GPU
@@ -107,10 +124,6 @@ int	main(int argc, char const *argv[])
 		extract_position_y (bodies, n, position_y);
 		extract_velocity_x (bodies, n, velocity_x);
 		extract_velocity_y (bodies, n, velocity_y);
-		// for (int i = 0; i < n; i++) {
-		// 	printf("%f ", position_x[i]);
-		// }
-		// printf("\n");
 
 		// cuda calls
 		// v_new = v + at, x_new = x + vt
@@ -118,11 +131,8 @@ int	main(int argc, char const *argv[])
 		cudaSaxpy(timestep, velocity_x, position_x, n);
 		cudaSaxpy(timestep, acc_y, velocity_y, n);
 		cudaSaxpy(timestep, velocity_y, position_y, n);
-		// for (int i = 0; i < n; i++) {
-		// 	printf("%f ", position_x[i]);
-		// }
-		// printf("\n");
 
+		// update values from GPU
 		reverse_position_x (bodies, n, position_x);
 		reverse_position_y (bodies, n, position_y);
 		reverse_velocity_x (bodies, n, velocity_x);
@@ -143,9 +153,8 @@ int	main(int argc, char const *argv[])
 		 	float_arr[4] = to_string(get_mass(bodies[i]));
 		 	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3] + " " + float_arr[4];
 		 	cout << output_line << "\n";
-		// 	output_file << output_line << "\n";
+			output_file << output_line << "\n";
 		}
-		printf("time step 1 \n\n");
 		output_file << "\n";
 	}	
 	output_file.close();
