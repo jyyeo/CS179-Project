@@ -11,7 +11,7 @@ int main(void) {
 
 	arr = (float*)malloc(size * sizeof(float));
 
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < size; i++) {
 		arr[i] = i * 1.5;
 		printf("%f ", arr[i]);
 	}
