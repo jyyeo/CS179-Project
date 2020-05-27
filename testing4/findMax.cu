@@ -13,7 +13,7 @@ __global__ void findMax(float *dev_arr, int size, float *dev_output) {
 
 	for (int j = 1; j < blockDim.x; j *= 2) {
 		if (tid % (2*j) == 0) {
-			shmem[tid] = fminf (shmem[tid],shmem[tid + j]);
+			shmem[tid] = fmaxf (shmem[tid],shmem[tid + j]);
 		}
 	}
 
