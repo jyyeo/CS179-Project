@@ -14,16 +14,16 @@ __global__ void findMax(float *dev_arr, int size, float *dev_output) {
 
 	__syncthreads();
 
-	for (int j = 1; j < blockDim.x; j *= 2) {
-		if (tid % (2*j) == 0) {
-			shmem[tid] = fmaxf (shmem[tid],shmem[tid + j]);
+	for (int s = blockDim.x / 2; s > 0; s >>= 1) {
+		if (tid < s && i < size) {
+			shmem[tid] = fmaxf (shmem[tid],shmem[tid + s]);
 		}
 	}
 
 	__syncthreads();
 
 	if (tid == 0) {
-		dev_output[blockIdx.x] = shmem[0];
+		dev_output[blockIdx.x] = shmem[tid];
 	}
 }
 
