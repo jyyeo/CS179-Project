@@ -24,7 +24,7 @@ int main(void) {
 	cudaMalloc((void**)&dev_max_val, sizeof(float));
 
 	cudaMemcpy(dev_arr, arr, size * sizeof(float), cudaMemcpyHostToDevice);
-	cudaMemset(dev_max_val, 0, sizeof(float));
+	cudaMemset(dev_max_val, 0.0, sizeof(float));
 
  	cudaFindMax(dev_arr, size, dev_max_val);
 

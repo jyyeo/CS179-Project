@@ -21,7 +21,6 @@ __global__ void findMax(float *dev_arr, int size, float *dev_max_val) {
 	int i = blockIdx.x * blockDim.x + threadIdx.x;
 	while (i < size) {
 		shmem[tid] = dev_arr[tid];
-		std::cout << shmem[tid] << std::endl;
 
 		__syncthreads();
 
