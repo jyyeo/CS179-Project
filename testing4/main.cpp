@@ -10,7 +10,6 @@ int main(void) {
 	float max_val;
 
 	arr = (float*)malloc(size * sizeof(float));
-	max_val = (float*)malloc(sizeof(float));
 
 	for (int i = 0; i < size; i++) {
 		arr[i] = (size - i) * 1.5;
@@ -35,5 +34,4 @@ int main(void) {
  	printf("%f\n", max_val);
 
 	free(arr);
-	free(max_val);
  }
