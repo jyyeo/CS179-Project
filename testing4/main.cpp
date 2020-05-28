@@ -7,7 +7,7 @@
 int main(void) {
 	int size = 10;
 	float *arr;
-	float *max_val;
+	float max_val;
 
 	arr = (float*)malloc(size * sizeof(float));
 	max_val = (float*)malloc(sizeof(float));
@@ -28,8 +28,11 @@ int main(void) {
 	cudaMemset(dev_max_val, 0, sizeof(float));
 
  	cudaFindMax(dev_arr, size, dev_max_val);
+
+ 	cudaMemcpy(&max_val, dev_max_val, 1 * sizeof(float), cudaMemcpyDeviceToHost);	
+
  	printf("completed\n");
- 	printf("%f\n", *max_val);
+ 	printf("%f\n", max_val);
 
 	free(arr);
 	free(max_val);
