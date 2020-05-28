@@ -53,7 +53,7 @@ void cudaFindMax(float *arr, int size, float *max_val) {
 	findMax<<<1, size>>>(dev_arr, size, dev_max_val);
 
 	//std::cout << dev_output[0] << std::endl;
-	cudaMemcpy(&max_val, &dev_max_val, 1 * sizeof(float), cudaMemcpyDeviceToHost);	
+	cudaMemcpy(&max_val, dev_max_val, 1 * sizeof(float), cudaMemcpyDeviceToHost);	
 
 	cudaFree(dev_arr);
 	cudaFree(dev_max_val);
