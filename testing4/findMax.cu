@@ -40,7 +40,7 @@ __global__ void findMax(float *dev_arr, int size, float *dev_max_val) {
 	}
 }
 
-void cudaFindMax(float *arr, int size, float *dev_max_val) {
+void cudaFindMax(float *dev_arr, int size, float *dev_max_val) {
 	
 	findMax<<<1, size>>>(dev_arr, size, dev_max_val);
 
