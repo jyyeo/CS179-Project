@@ -26,7 +26,7 @@ __global__ void findMax(float *dev_arr, int size, float *dev_max_val) {
 
 		for (int s = blockDim.x; s > 1; s >>= 1) {
 			if (tid < s) {
-				if (shmem[tid] > shmem[tid + s]) {
+				if (shmem[tid] < shmem[tid + s]) {
 					shmem[tid] = shmem[tid + s];
 				}
 			}
@@ -42,6 +42,6 @@ __global__ void findMax(float *dev_arr, int size, float *dev_max_val) {
 
 void cudaFindMax(float *dev_arr, int size, float *dev_max_val) {
 	
-	findMax<<<1, size>>>(dev_arr, size, dev_max_val);
+	findMax<<<1, 1>>>(dev_arr, size, dev_max_val);
 
 }
