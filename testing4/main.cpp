@@ -18,7 +18,16 @@ int main(void) {
 	}
 	printf("\n");
  	
- 	cudaFindMax(arr, size, max_val);
+ 	float *dev_arr;
+	float *dev_max_val;
+
+	cudaMalloc((void**)&dev_arr, size * sizeof(float));
+	cudaMalloc((void**)&dev_max_val, 1 * sizeof(float));
+
+	cudaMemcpy(dev_arr, arr, size * sizeof(float), cudaMemcpyHostToDevice);
+	cudaMemset(dev_max_val, 0, sizeof(float));
+
+ 	cudaFindMax(dev_arr, size, dev_max_val);
  	printf("completed\n");
  	printf("%f\n", *max_val);
 
