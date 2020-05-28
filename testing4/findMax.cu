@@ -16,7 +16,7 @@ __device__ static float atomicMax(float* address, float val) {
 }
 
 __global__ void findMax(float *dev_arr, int size, float *dev_max_val) {
-	extern __shared__ float shmem[size];
+	extern __shared__ float shmem[];
 	int tid = threadIdx.x;
 	int i = blockIdx.x * blockDim.x + threadIdx.x;
 	while (i < size) {
