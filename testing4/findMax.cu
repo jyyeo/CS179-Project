@@ -44,8 +44,4 @@ void cudaFindMax(float *dev_arr, int size, float *dev_max_val) {
 	
 	findMax<<<1, size>>>(dev_arr, size, dev_max_val);
 
-	//std::cout << dev_output[0] << std::endl;
-
-	cudaFree(dev_arr);
-	cudaFree(dev_max_val);
 }
