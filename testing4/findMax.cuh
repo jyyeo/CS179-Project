@@ -3,8 +3,8 @@
 
 __device__ static float atomicMax(float* address, float val);
 
-__global__ void findMax(float *dev_arr, int size, float *dev_output);
+__global__ void findMax(float *dev_arr, int size, float *dev_max_val);
 
-void cudaFindMax(float *arr, int size, float *output);
+void cudaFindMax(float *arr, int size, float *max_val);
 
 #endif

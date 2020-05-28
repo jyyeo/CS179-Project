@@ -15,7 +15,7 @@ __device__ static float atomicMax(float* address, float val) {
     return __int_as_float(old);
 }
 
-__global__ void findMax(float *dev_arr, int size, float *dev_output) {
+__global__ void findMax(float *dev_arr, int size, float *dev_max_val) {
 	extern __shared__ float shmem[];
 	int tid = threadIdx.x;
 	int i = blockIdx.x * blockDim.x + threadIdx.x;
@@ -40,20 +40,20 @@ __global__ void findMax(float *dev_arr, int size, float *dev_output) {
 	}
 }
 
-void cudaFindMax(float *arr, int size, float *output) {
+void cudaFindMax(float *arr, int size, float *max_val) {
 	float *dev_arr;
-	float *dev_output;
+	float *dev_max_val;
 
 	cudaMalloc((void**)&dev_arr, size * sizeof(float));
-	cudaMalloc((void**)&dev_output, 1 * sizeof(float));
+	cudaMalloc((void**)&dev_max_val, 1 * sizeof(float));
 
 	cudaMemcpy(dev_arr, arr, size * sizeof(float), cudaMemcpyHostToDevice);
 	cudaMemset(dev_output, 0, sizeof(float));
-	
+
 	findMax<<<1, size>>>(dev_arr, size, dev_output);
 
 	//std::cout << dev_output[0] << std::endl;
-	cudaMemcpy(output, dev_output, size * sizeof(float), cudaMemcpyDeviceToHost);	
+	cudaMemcpy(&max_val, dev_max_val, 1 * sizeof(float), cudaMemcpyDeviceToHost);	
 
 	cudaFree(dev_arr);
 	cudaFree(dev_output);

@@ -7,10 +7,10 @@
 int main(void) {
 	int size = 10;
 	float *arr;
-	float *output;
+	float *max_val;
 
 	arr = (float*)malloc(size * sizeof(float));
-	output = (float*)malloc(1 * sizeof(float));
+	max_val = (float*)malloc(sizeof(float));
 
 	for (int i = 0; i < size; i++) {
 		arr[i] = (size - i) * 1.5;
@@ -18,10 +18,10 @@ int main(void) {
 	}
 	printf("\n");
  	
- 	cudaFindMax(arr, size, output);
+ 	cudaFindMax(arr, size, max_val);
  	printf("completed\n");
- 	printf("%f\n", *output);
+ 	printf("%f\n", *max_val);
 
 	free(arr);
-	free(output);
+	free(max_val);
  }
