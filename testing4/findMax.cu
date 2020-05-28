@@ -34,7 +34,7 @@ __global__ void findMax(float *dev_arr, int size, float *dev_max_val) {
 		}
 
 		if (tid == 0) {
-			atomicMax(dev_output,shmem[0]);
+			atomicMax(dev_max_val,shmem[0]);
 		}
 		i += blockDim.x * gridDim.x;
 	}
