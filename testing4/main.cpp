@@ -28,19 +28,20 @@ int main(void) {
 
  	cudaFindMax(dev_arr, size, dev_max_val);
 
+ 	cudaMemcpy(&max_val, dev_max_val, sizeof(float), cudaMemcpyDeviceToHost);	
+ 	cudaMemcpy(arr, dev_arr, size * sizeof(float), cudaMemcpyDeviceToHost);	
+
  	for (int i = 0; i < size; i++) {
 		arr[i] = (size - i) * 1.5;
 		printf("%f ", arr[i]);
 	}
 	printf("\n");
 
- 	cudaMemcpy(&max_val, dev_max_val, 1 * sizeof(float), cudaMemcpyDeviceToHost);	
-
  	printf("completed\n");
  	printf("%f\n", max_val);
 
 	cudaFree(dev_arr);
 	cudaFree(dev_max_val);
-	
+
 	free(arr);
  }
