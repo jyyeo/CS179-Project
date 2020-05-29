@@ -27,7 +27,7 @@ __global__ void findMin(float *dev_arr, int size, float *dev_min_val) {
 	extern __shared__ float shmem[];
 	const unsigned int tid = threadIdx.x;
 	unsigned int i = blockIdx.x * blockDim.x + threadIdx.x;
-	while (i < size) {
+	while (i < size + 1) {
 		shmem[tid] = dev_arr[i];
 
 		__syncthreads();
