@@ -178,6 +178,7 @@ int	main(int argc, char const *argv[])
 			// output_file << output_line << "\n";
 		}
 		output_file << "\n";
+		printf("timestep %d\n", timestep);
 	}	
 	output_file.close();
 
