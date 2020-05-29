@@ -20,11 +20,11 @@ __global__ void findMax(float *dev_arr, int size, float *dev_max_val) {
 	int tid = threadIdx.x;
 	int i = blockIdx.x * blockDim.x + threadIdx.x;
 	while (i < size) {
-		shmem[tid] = dev_arr[tid];
+		shmem[tid] = dev_arr[i];
 
 		__syncthreads();
 
-		for (int s = blockDim.x; s > 1; s >>= 1) {
+		for (int s = blockDim.x/2; s > 0; s >>= 1) {
 			if (tid < s) {
 				if (shmem[tid] < shmem[tid + s]) {
 					shmem[tid] = shmem[tid + s];

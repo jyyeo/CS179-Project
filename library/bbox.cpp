@@ -49,6 +49,14 @@ float get_max_y(Body bodies[], int n) {
 	return max_y;
 }
 
+float get_centre_x (float min_x, float max_x) {
+	return max_x - 0.5 * (max_x - min_x);
+}
+
+float get_centre_y (float min_y, float max_y) {
+	return max_y - 0.5 * (max_y - min_y);
+} 
+
 vector_t get_min_x(Bbox bbox) {
 	return (bbox.bl).x;
 }

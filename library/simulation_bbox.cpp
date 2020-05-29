@@ -84,17 +84,10 @@ int	main(int argc, char const *argv[])
 
 		float centre_x = get_centre_x(min_x, max_x);
 		float centre_y = get_centre_y(min_y, max_y);
-		
-		for (int i = 0; i < n; i++) {
-			float x = get_position(bodies[i]).x;
-			float y = get_position(bodies[i]).y;
-			while (x < get_min_x(boxes[i]) || x > get_max_x(boxes[i]) ||
-				   y < get_min_y(boxes[i]) || y > get_max_y(boxes[i])) {
-				if (x < get_min_x(boxes[i])) {
 
-				}
-			}
-		}
+		// insert bodies into octants
+		
+		
 		// calculate acceleration on each body, update position and velocity
 		float acc_x[n];
 		float acc_y[n];
