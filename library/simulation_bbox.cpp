@@ -107,7 +107,7 @@ int	main(int argc, char const *argv[])
 		cudaFindMax(position_y, n, max_y);
 
 		printf("%f %f %f %f\n", *min_x, *min_y, *max_x, *max_y);
-		printf("1\n");
+
 		for (int i = 0; i < n; i++) {
 			// vector_t mins = {min_x, min_y};
 			boxes[i].bl = {*min_x, *min_y};
@@ -136,26 +136,26 @@ int	main(int argc, char const *argv[])
 				acc_y[i] += total_acc.y;
 			}
 		}
-		printf("2\n");
+
 		// organize data for GPU
 		extract_position_x (bodies, n, position_x);
 		extract_position_y (bodies, n, position_y);
 		extract_velocity_x (bodies, n, velocity_x);
 		extract_velocity_y (bodies, n, velocity_y);
-		printf("3\n");
+		
 		// cuda calls
 		// v_new = v + at, x_new = x + vt
 		cudaSaxpy(timestep, acc_x, velocity_x, n);
 		cudaSaxpy(timestep, velocity_x, position_x, n);
 		cudaSaxpy(timestep, acc_y, velocity_y, n);
 		cudaSaxpy(timestep, velocity_y, position_y, n);
-		printf("4\n");
+		
 		// update values from GPU
 		reverse_position_x (bodies, n, position_x);
 		reverse_position_y (bodies, n, position_y);
 		reverse_velocity_x (bodies, n, velocity_x);
 		reverse_velocity_y (bodies, n, velocity_y);
-		printf("5\n");
+		
 		free(position_x);
 		free(position_y);
 		free(velocity_x);
@@ -164,7 +164,7 @@ int	main(int argc, char const *argv[])
 		free(max_x);
 		free(min_y);
 		free(max_y);
-		printf("6\n");
+		
 		 // output to txt file
 		 for (int i = 0; i < n; i++) {
 		 	string float_arr[5];
@@ -173,13 +173,13 @@ int	main(int argc, char const *argv[])
 		 	float_arr[2] = to_string(get_velocity(bodies[i]).x);
 		 	float_arr[3] = to_string(get_velocity(bodies[i]).y);
 		 	float_arr[4] = to_string(get_mass(bodies[i]));
-		 	// string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3] + " " + float_arr[4];
-		 	// cout << output_line << "\n";
+		 	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3] + " " + float_arr[4];
+		 	cout << output_line << "\n";
 			// output_file << output_line << "\n";
 		}
-		printf("7\n");
+		
 		output_file << "\n";
-		printf("timestep %d\n", timestep);
+		printf("timestep %d\n", t);
 	}	
 	output_file.close();
 
