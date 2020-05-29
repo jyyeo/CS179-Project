@@ -46,6 +46,10 @@ __global__ void findMin(float *dev_arr, int size, float *dev_min_val) {
 		}
 		i += blockDim.x * gridDim.x;
 	}
+	if (tid == 0) {
+		atomicMin(dev_min_val,shmem[0]);
+	}
+
 }
 
 void cudaFindMin(float *arr, int size, float *min_val) {
