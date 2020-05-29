@@ -14,6 +14,8 @@
 #include "data.h"
 #include "saxpy.cuh"
 #include "bbox.h"
+#include "findMin.cuh"
+#include "findMax.cuh"
 
 using std::cerr;
 using std::string;
@@ -70,12 +72,33 @@ int	main(int argc, char const *argv[])
 
 	for (int t = 0; t < timestep; t++) {
 
-		// calculate bounding boxes for each body
+		// calculate bounding boxes for each body (CPU)
 		Bbbox boxes[n];
 		float min_x = get_min_x(bodies, n);
 		float max_x = get_max_x(bodies, n);
 		float min_y = get_min_y(bodies, n);
 		float max_y = get_max_y(bodies, n);
+
+		// calculate bounding boxes for each body (GPU)
+		// organize data for GPU
+		float *position_x;
+		position_x = (float*)malloc(n * sizeof(float));
+		float *position_y;
+		position_y = (float*)malloc(n * sizeof(float));
+		float *velocity_x;
+		velocity_x = (float*)malloc(n * sizeof(float));
+		float *velocity_y;
+		velocity_y = (float*)malloc(n * sizeof(float));
+
+		extract_position_x (bodies, n, position_x);
+		extract_position_y (bodies, n, position_y);
+
+		// cuda call for find min and find max
+		float *min_x, *max_x, *min_y, *max_y;
+		cudaFindMin(position_x, n, min_x);
+		cudaFindMax(position_x, n, max_x);
+
+
 
 		for (int i = 0; i < n; i++) {
 			boxes[i].bl = {min_x, min_y};
@@ -105,14 +128,14 @@ int	main(int argc, char const *argv[])
 		}
 		
 		// organize data for GPU
-		float *position_x;
-		position_x = (float*)malloc(n * sizeof(float));
-		float *position_y;
-		position_y = (float*)malloc(n * sizeof(float));
-		float *velocity_x;
-		velocity_x = (float*)malloc(n * sizeof(float));
-		float *velocity_y;
-		velocity_y = (float*)malloc(n * sizeof(float));
+		// float *position_x;
+		// position_x = (float*)malloc(n * sizeof(float));
+		// float *position_y;
+		// position_y = (float*)malloc(n * sizeof(float));
+		// float *velocity_x;
+		// velocity_x = (float*)malloc(n * sizeof(float));
+		// float *velocity_y;
+		// velocity_y = (float*)malloc(n * sizeof(float));
 		extract_position_x (bodies, n, position_x);
 		extract_position_y (bodies, n, position_y);
 		extract_velocity_x (bodies, n, velocity_x);
@@ -135,6 +158,10 @@ int	main(int argc, char const *argv[])
 		free(position_y);
 		free(velocity_x);
 		free(velocity_y);
+		free(min_x);
+		free(max_x);
+		free(min_y);
+		free(max_y);
 
 		 // output to txt file
 		 for (int i = 0; i < n; i++) {
