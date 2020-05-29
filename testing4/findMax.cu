@@ -17,14 +17,14 @@ __device__ static float atomicMax(float* address, float val) {
 
 __global__ void findMax(float *dev_arr, int size, float *dev_max_val) {
 	extern __shared__ float shmem[];
-	int tid = threadIdx.x;
-	int i = blockIdx.x * blockDim.x + threadIdx.x;
+	const unsigned int tid = threadIdx.x;
+	unsigned int i = blockIdx.x * blockDim.x + threadIdx.x;
 	while (i < size) {
 		shmem[tid] = dev_arr[i];
 
 		__syncthreads();
 
-		for (int s = blockDim.x/2; s > 0; s >>= 1) {
+		for (unsigned int s = blockDim.x/2; s > 0; s >>= 1) {
 			if (tid < s) {
 				if (shmem[tid] < shmem[tid + s]) {
 					shmem[tid] = shmem[tid + s];
@@ -42,6 +42,6 @@ __global__ void findMax(float *dev_arr, int size, float *dev_max_val) {
 
 void cudaFindMax(float *dev_arr, int size, float *dev_max_val) {
 	
-	findMax<<<1, size>>>(dev_arr, size, dev_max_val);
+	findMax<<<1, size * sizeof(float)>>>(dev_arr, size, dev_max_val);
 
 }
