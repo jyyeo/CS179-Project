@@ -96,17 +96,17 @@ int	main(int argc, char const *argv[])
 		extract_position_y (bodies, n, position_y);
 
 		// cuda call for find min and find max
-		float *min_x, *max_x, *min_y, *max_y;
-		min_x = (float*)malloc(sizeof(float));
-		max_x = (float*)malloc(sizeof(float));
-		min_y = (float*)malloc(sizeof(float));
-		max_y = (float*)malloc(sizeof(float));
-		cudaFindMin(position_x, n, min_x);
-		cudaFindMax(position_x, n, max_x);
-		cudaFindMin(position_y, n, min_y);
-		cudaFindMax(position_y, n, max_y);
+		// float *min_x, *max_x, *min_y, *max_y;
+		// min_x = (float*)malloc(sizeof(float));
+		// max_x = (float*)malloc(sizeof(float));
+		// min_y = (float*)malloc(sizeof(float));
+		// max_y = (float*)malloc(sizeof(float));
+		// cudaFindMin(position_x, n, min_x);
+		// cudaFindMax(position_x, n, max_x);
+		// cudaFindMin(position_y, n, min_y);
+		// cudaFindMax(position_y, n, max_y);
 
-		printf("%f %f %f %f\n", *min_x, *min_y, *max_x, *max_y);
+		// printf("%f %f %f %f\n", *min_x, *min_y, *max_x, *max_y);
 
 		for (int i = 0; i < n; i++) {
 			// vector_t mins = {min_x, min_y};
