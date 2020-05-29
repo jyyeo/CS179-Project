@@ -1,12 +1,10 @@
 #include <cstdio>
-
-#include <cuda_runtime.h>
-#include <cufft.h>
-
+#include <stdlib.h>
+#include <iostream>
+#include "cuda_runtime.h"
 #include "findMax.cuh"
 
-__device__ static float atomicMax(float* address, float val)
-{
+__device__ static float atomicMax(float* address, float val) {
     int* address_as_i = (int*) address;
     int old = *address_as_i, assumed;
     do {
@@ -17,39 +15,33 @@ __device__ static float atomicMax(float* address, float val)
     return __int_as_float(old);
 }
 
-__global__
-void
-cudaMaximumKernel(cufftComplex *out_data, float *max_abs_val,
-    int padded_length) {
+__global__ void findMax(float *dev_arr, int size, float *dev_max_val) {
+	extern __shared__ float shmem[];
+	const unsigned int tid = threadIdx.x;
+	unsigned int i = blockIdx.x * blockDim.x + threadIdx.x;
+	while (i < size) {
+		shmem[tid] = dev_arr[i];
 
-    extern __shared__ float shared_memory[];
-    int i = threadIdx.x + blockIdx.x * blockDim.x;
-    int j = threadIdx.x;
-    while (i < padded_length) {
-	shared_memory[j] = fabs(out_data[j].x);
-	__syncthreads();
-	for (int k = blockDim.x; k > 1; k >>= 1) {
-	    if (j < k) { //place values in contiguous memory locations
-		if (shared_memory[j] < shared_memory[j + k]) { //store the larger value
-		    shared_memory[j] = shared_memory[j + k];
+		__syncthreads();
+
+		for (unsigned int s = blockDim.x/2; s > 0; s >>= 1) {
+			if (tid < s) {
+				if (shmem[tid] < shmem[tid + s]) {
+					shmem[tid] = shmem[tid + s];
+				}
+			}
+			__syncthreads();
 		}
-	    }		
-	    __syncthreads();
+
+		if (tid == 0) {
+			atomicMax(dev_max_val,shmem[0]);
+		}
+		i += blockDim.x * gridDim.x;
 	}
-	if (threadIdx.x == 0) {
-		atomicMax(max_abs_val, shared_memory[0]);
-	} //run this once, after the largest value is in first memory location
-    	i += blockDim.x * gridDim.x;
-    }
 }
 
-void cudaCallMaximumKernel(const unsigned int blocks,
-        const unsigned int threadsPerBlock,
-        cufftComplex *out_data,
-        float *max_abs_val,
-        const unsigned int padded_length) {
-        
+void cudaFindMax(float *dev_arr, int size, float *dev_max_val) {
+	
+	findMax<<<1, size, size * sizeof(float)>>>(dev_arr, size, dev_max_val);
 
-    /* TODO 2: Call the max-finding kernel. */
-    cudaMaximumKernel<<<blocks,threadsPerBlock>>>(out_data, max_abs_val, padded_length);
 }

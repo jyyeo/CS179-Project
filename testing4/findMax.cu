@@ -40,8 +40,21 @@ __global__ void findMax(float *dev_arr, int size, float *dev_max_val) {
 	}
 }
 
-void cudaFindMax(float *dev_arr, int size, float *dev_max_val) {
-	
+void cudaFindMax(float *arr, int size, float *max_val) {
+	float *dev_arr;
+	float *dev_max_val;
+
+	cudaMalloc((void**)&dev_arr, size * sizeof(float));
+	cudaMalloc((void**)&dev_max_val, sizeof(float));
+
+	cudaMemcpy(dev_arr, arr, size * sizeof(float), cudaMemcpyHostToDevice);
+	cudaMemset(dev_max_val, 0.0, sizeof(float));
 	findMax<<<1, size, size * sizeof(float)>>>(dev_arr, size, dev_max_val);
+	
+	cudaMemcpy(max_val, dev_max_val, sizeof(float), cudaMemcpyDeviceToHost);	
+	cudaMemcpy(arr, dev_arr, size * sizeof(float), cudaMemcpyDeviceToHost);
+
+	cudaFree(dev_arr);
+	cudaFree(dev_max_val);
 
 }
