@@ -13,7 +13,7 @@ int main(void) {
 	max_val = (float*)malloc(sizeof(float));
 
 	for (int i = 0; i < size; i++) {
-		arr[i] = (size - i) * 1.5;
+		arr[i] = (i) * 1.5;
 		printf("%f ", arr[i]);
 	}
 	printf("\n");
