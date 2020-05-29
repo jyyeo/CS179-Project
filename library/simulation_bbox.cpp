@@ -83,14 +83,14 @@ int	main(int argc, char const *argv[])
 
 		// // calculate bounding boxes for each body (GPU)
 		// // organize data for GPU
-		// float *position_x;
-		// position_x = (float*)malloc(n * sizeof(float));
-		// float *position_y;
-		// position_y = (float*)malloc(n * sizeof(float));
-		// float *velocity_x;
-		// velocity_x = (float*)malloc(n * sizeof(float));
-		// float *velocity_y;
-		// velocity_y = (float*)malloc(n * sizeof(float));
+		float *position_x;
+		position_x = (float*)malloc(n * sizeof(float));
+		float *position_y;
+		position_y = (float*)malloc(n * sizeof(float));
+		float *velocity_x;
+		velocity_x = (float*)malloc(n * sizeof(float));
+		float *velocity_y;
+		velocity_y = (float*)malloc(n * sizeof(float));
 
 		// extract_position_x (bodies, n, position_x);
 		// extract_position_y (bodies, n, position_y);
