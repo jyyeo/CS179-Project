@@ -57,18 +57,18 @@ float get_centre_y (float min_y, float max_y) {
 	return max_y - 0.5 * (max_y - min_y);
 } 
 
-vector_t get_min_x(Bbox bbox) {
-	return (bbox.bl).x;
-}
+// float get_min_x(Bbox bbox) {
+// 	return (bbox.bl).x;
+// }
 
-vector_t get_max_x(Bbox bbox) {
-	return (bbox.tr).x;
-}
+// float get_max_x(Bbox bbox) {
+// 	return (bbox.tr).x;
+// }
 
-vector_t get_min_y(Bbox bbox) {
-	return (bbox.bl).y;
-}
+// float get_min_y(Bbox bbox) {
+// 	return (bbox.bl).y;
+// }
 
-vector_t get_max_y(Bbox bbox) {
-	return (bbox.tr).y;
-}
+// float get_max_y(Bbox bbox) {
+// 	return (bbox.tr).y;
+// }
