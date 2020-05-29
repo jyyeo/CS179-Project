@@ -33,10 +33,13 @@ __global__ void findMax(float *dev_arr, int size, float *dev_max_val) {
 			__syncthreads();
 		}
 
-		if (tid == 0) {
-			atomicMax(dev_max_val,shmem[0]);
-		}
+		// if (tid == 0) {
+		// 	atomicMax(dev_max_val,shmem[0]);
+		// }
 		i += blockDim.x * gridDim.x;
+	}
+	if (tid == 0) {
+		atomicMax(dev_max_val,shmem[0]);
 	}
 }
 
