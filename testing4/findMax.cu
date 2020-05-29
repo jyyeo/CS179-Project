@@ -50,7 +50,7 @@ void cudaFindMax(float *arr, int size, float *max_val) {
 	cudaMemcpy(dev_arr, arr, size * sizeof(float), cudaMemcpyHostToDevice);
 	cudaMemset(dev_max_val, 0.0, sizeof(float));
 	
-	findMax<<<1, size, size * sizeof(float)>>>(dev_arr, size, dev_max_val);
+	findMax<<<1, 16, 16 * sizeof(float)>>>(dev_arr, size, dev_max_val);
 	
 	cudaMemcpy(max_val, dev_max_val, sizeof(float), cudaMemcpyDeviceToHost);	
 	cudaMemcpy(arr, dev_arr, size * sizeof(float), cudaMemcpyDeviceToHost);
