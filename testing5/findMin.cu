@@ -26,8 +26,7 @@ __device__ __forceinline__ float atomicMin (float * addr, float value) {
 __global__ void findMin(float *dev_arr, int size, float *dev_min_val) {
 	extern __shared__ float shmem[];
 	const unsigned int tid = threadIdx.x;
-	// unsigned int i = blockIdx.x * blockDim.x + threadIdx.x;
-	unsigned int i = 0;
+	unsigned int i = blockIdx.x * blockDim.x + threadIdx.x;
 	while (i < size) {
 		shmem[tid] = dev_arr[i];
 
@@ -59,7 +58,7 @@ void cudaFindMin(float *arr, int size, float *min_val) {
 	cudaMemcpy(dev_arr, arr, size * sizeof(float), cudaMemcpyHostToDevice);
 	cudaMemset(dev_min_val, 0.0, sizeof(float));
 	
-	findMin<<<1, size, size * sizeof(float)>>>(dev_arr, size, dev_min_val);
+	findMin<<<size, size, size * sizeof(float)>>>(dev_arr, size, dev_min_val);
 	
 	cudaMemcpy(min_val, dev_min_val, sizeof(float), cudaMemcpyDeviceToHost);	
 	cudaMemcpy(arr, dev_arr, size * sizeof(float), cudaMemcpyDeviceToHost);
