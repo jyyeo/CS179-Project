@@ -5,7 +5,7 @@
 #include "findMin.cuh"
 
 int main(void) {
-	int size = 10;
+	int size = 5;
 	float *arr;
 	float *min_val;
 

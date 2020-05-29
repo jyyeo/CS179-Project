@@ -33,10 +33,13 @@ __global__ void findMax(float *dev_arr, int size, float *dev_max_val) {
 			__syncthreads();
 		}
 
-		if (tid == 0) {
-			atomicMax(dev_max_val,shmem[0]);
-		}
+		// if (tid == 0) {
+		// 	atomicMax(dev_max_val,shmem[0]);
+		// }
 		i += blockDim.x * gridDim.x;
+	}
+	if (tid == 0) {
+		atomicMax(dev_max_val,shmem[0]);
 	}
 }
 
@@ -49,8 +52,10 @@ void cudaFindMax(float *arr, int size, float *max_val) {
 
 	cudaMemcpy(dev_arr, arr, size * sizeof(float), cudaMemcpyHostToDevice);
 	cudaMemset(dev_max_val, 0.0, sizeof(float));
+
+	float block_dim = powf(2, ceil(log2(size)));
 	
-	findMax<<<1, size, size * sizeof(float)>>>(dev_arr, size, dev_max_val);
+	findMax<<<1, block_dim, block_dim * sizeof(float)>>>(dev_arr, size, dev_max_val);
 	
 	cudaMemcpy(max_val, dev_max_val, sizeof(float), cudaMemcpyDeviceToHost);	
 	cudaMemcpy(arr, dev_arr, size * sizeof(float), cudaMemcpyDeviceToHost);
