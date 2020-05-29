@@ -26,7 +26,7 @@ __global__ void findMin(float *dev_arr, int size, float *dev_min_val) {
 
 		for (unsigned int s = blockDim.x/2; s > 0; s >>= 1) {
 			if (tid < s) {
-				if (shmem[tid] < shmem[tid + s]) {
+				if (shmem[tid] > shmem[tid + s]) {
 					shmem[tid] = shmem[tid + s];
 				}
 			}
