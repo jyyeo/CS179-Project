@@ -58,7 +58,7 @@ void cudaFindMin(float *arr, int size, float *min_val) {
 	cudaMemcpy(dev_arr, arr, size * sizeof(float), cudaMemcpyHostToDevice);
 	cudaMemset(dev_min_val, 0.0, sizeof(float));
 	
-	findMin<<<1, size, size * sizeof(float)>>>(dev_arr, size, dev_min_val);
+	findMin<<<1, size, size * sizeof(float) + 1>>>(dev_arr, size, dev_min_val);
 	
 	cudaMemcpy(min_val, dev_min_val, sizeof(float), cudaMemcpyDeviceToHost);	
 	cudaMemcpy(arr, dev_arr, size * sizeof(float), cudaMemcpyDeviceToHost);
