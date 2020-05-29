@@ -96,11 +96,11 @@ int	main(int argc, char const *argv[])
 		// extract_position_y (bodies, n, position_y);
 
 		// // cuda call for find min and find max
-		// float *min_x, *max_x, *min_y, *max_y;
-		// min_x = (float*)malloc(sizeof(float));
-		// max_x = (float*)malloc(sizeof(float));
-		// min_y = (float*)malloc(sizeof(float));
-		// max_y = (float*)malloc(sizeof(float));
+		float *min_x, *max_x, *min_y, *max_y;
+		min_x = (float*)malloc(sizeof(float));
+		max_x = (float*)malloc(sizeof(float));
+		min_y = (float*)malloc(sizeof(float));
+		max_y = (float*)malloc(sizeof(float));
 		// // cudaFindMin(position_x, n, min_x);
 		// // cudaFindMax(position_x, n, max_x);
 		// // cudaFindMin(position_y, n, min_y);
