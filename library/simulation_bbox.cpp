@@ -105,8 +105,10 @@ int	main(int argc, char const *argv[])
 		printf("%f %f %f %f\n", min_x, min_y, max_x, max_y);
 
 		for (int i = 0; i < n; i++) {
-			boxes[i].bl = {min_x, min_y};
-			boxes[i].tr = {max_x, max_y};
+			vector_t mins = {min_x, min_y};
+			boxes[i].bl = mins;
+			vector_t maxs = {max_x, max_y};
+			boxes[i].tr = maxs;
 		}
 
 		float centre_x = get_centre_x(min_x, max_x);
@@ -132,14 +134,6 @@ int	main(int argc, char const *argv[])
 		}
 		
 		// organize data for GPU
-		// float *position_x;
-		// position_x = (float*)malloc(n * sizeof(float));
-		// float *position_y;
-		// position_y = (float*)malloc(n * sizeof(float));
-		// float *velocity_x;
-		// velocity_x = (float*)malloc(n * sizeof(float));
-		// float *velocity_y;
-		// velocity_y = (float*)malloc(n * sizeof(float));
 		extract_position_x (bodies, n, position_x);
 		extract_position_y (bodies, n, position_y);
 		extract_velocity_x (bodies, n, velocity_x);
@@ -175,8 +169,8 @@ int	main(int argc, char const *argv[])
 		 	float_arr[2] = to_string(get_velocity(bodies[i]).x);
 		 	float_arr[3] = to_string(get_velocity(bodies[i]).y);
 		 	float_arr[4] = to_string(get_mass(bodies[i]));
-		 	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3] + " " + float_arr[4];
-		 	cout << output_line << "\n";
+		 	// string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3] + " " + float_arr[4];
+		 	// cout << output_line << "\n";
 			output_file << output_line << "\n";
 		}
 		output_file << "\n";
