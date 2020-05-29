@@ -111,8 +111,8 @@ int	main(int argc, char const *argv[])
 			boxes[i].tr = {*max_x, *max_y};
 		}
 
-		float centre_x = get_centre_x(min_x, max_x);
-		float centre_y = get_centre_y(min_y, max_y);
+		float centre_x = get_centre_x(*min_x, *max_x);
+		float centre_y = get_centre_y(*min_y, *max_y);
 
 		// insert bodies into octants
 		
@@ -171,7 +171,7 @@ int	main(int argc, char const *argv[])
 		 	float_arr[4] = to_string(get_mass(bodies[i]));
 		 	// string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3] + " " + float_arr[4];
 		 	// cout << output_line << "\n";
-			output_file << output_line << "\n";
+			// output_file << output_line << "\n";
 		}
 		output_file << "\n";
 	}	
