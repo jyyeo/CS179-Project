@@ -42,8 +42,9 @@ int main(void) {
  	printf("completed\n");
  	printf("%f\n", max_val);
 
-	cudaFree(dev_arr);
-	cudaFree(dev_max_val);
+	// cudaFree(dev_arr);
+	// cudaFree(dev_max_val);
 
 	free(arr);
+	free(max_val);
  }
