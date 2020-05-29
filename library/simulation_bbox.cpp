@@ -73,13 +73,13 @@ int	main(int argc, char const *argv[])
 	for (int t = 0; t < timestep; t++) {
 
 		// calculate bounding boxes for each body (CPU)
-		Bbbox boxes[n];
-		float min_x = get_min_x(bodies, n);
-		float max_x = get_max_x(bodies, n);
-		float min_y = get_min_y(bodies, n);
-		float max_y = get_max_y(bodies, n);
+		Bbox boxes[n];
+		float min_x_cpu = get_min_x(bodies, n);
+		float max_x_cpu = get_max_x(bodies, n);
+		float min_y_cpu = get_min_y(bodies, n);
+		float max_y_cpu = get_max_y(bodies, n);
 
-		printf("%f %f %f %f\n", min_x, min_y, max_x, max_y);
+		printf("%f %f %f %f\n", min_x_cpu, min_y_cpu, max_x_cpu, max_y_cpu);
 
 		// calculate bounding boxes for each body (GPU)
 		// organize data for GPU

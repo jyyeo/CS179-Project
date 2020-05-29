@@ -1,3 +1,6 @@
+#ifndef __MECHANICS_H__
+#define __MECHANICS_H__
+
 #include "vector.h"
 
 // const float G = 6.673e-11;
@@ -24,3 +27,5 @@ vector_t acc_on_point(vector_t p1, float mass, vector_t p2);
 vector_t acc_on (Body a, Body b);
 
 void updateBody(Body &b, vector_t acc, int t);
+
+#endif
