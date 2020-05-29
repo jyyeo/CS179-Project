@@ -53,7 +53,7 @@ void cudaFindMax(float *arr, int size, float *max_val) {
 	cudaMemcpy(dev_arr, arr, size * sizeof(float), cudaMemcpyHostToDevice);
 	cudaMemset(dev_max_val, 0.0, sizeof(float));
 
-	float block_dim = powf(2, ceil(log(size), log(2)));
+	float block_dim = powf(2, ceil(log2(size)));
 	
 	findMax<<<1, block_dim, block_dim * sizeof(float)>>>(dev_arr, size, dev_max_val);
 	
