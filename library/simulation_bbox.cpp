@@ -115,8 +115,8 @@ int	main(int argc, char const *argv[])
 			boxes[i].tr = {*max_x, *max_y};
 		}
 
-		float centre_x = get_centre_x(*min_x, *max_x);
-		float centre_y = get_centre_y(*min_y, *max_y);
+		// float centre_x = get_centre_x(*min_x, *max_x);
+		// float centre_y = get_centre_y(*min_y, *max_y);
 
 		// insert bodies into octants
 		
