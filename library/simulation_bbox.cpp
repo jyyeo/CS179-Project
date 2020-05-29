@@ -72,17 +72,17 @@ int	main(int argc, char const *argv[])
 
 	for (int t = 0; t < timestep; t++) {
 
-		// // calculate bounding boxes for each body (CPU)
-		// Bbox boxes[n];
-		// float min_x_cpu = get_min_x(bodies, n);
-		// float max_x_cpu = get_max_x(bodies, n);
-		// float min_y_cpu = get_min_y(bodies, n);
-		// float max_y_cpu = get_max_y(bodies, n);
+		// calculate bounding boxes for each body (CPU)
+		Bbox boxes[n];
+		float min_x_cpu = get_min_x(bodies, n);
+		float max_x_cpu = get_max_x(bodies, n);
+		float min_y_cpu = get_min_y(bodies, n);
+		float max_y_cpu = get_max_y(bodies, n);
 
-		// printf("%f %f %f %f\n", min_x_cpu, min_y_cpu, max_x_cpu, max_y_cpu);
+		printf("%f %f %f %f\n", min_x_cpu, min_y_cpu, max_x_cpu, max_y_cpu);
 
-		// // calculate bounding boxes for each body (GPU)
-		// // organize data for GPU
+		// calculate bounding boxes for each body (GPU)
+		// organize data for GPU
 		float *position_x;
 		position_x = (float*)malloc(n * sizeof(float));
 		float *position_y;
@@ -92,28 +92,28 @@ int	main(int argc, char const *argv[])
 		float *velocity_y;
 		velocity_y = (float*)malloc(n * sizeof(float));
 
-		// extract_position_x (bodies, n, position_x);
-		// extract_position_y (bodies, n, position_y);
+		extract_position_x (bodies, n, position_x);
+		extract_position_y (bodies, n, position_y);
 
-		// // cuda call for find min and find max
+		// cuda call for find min and find max
 		float *min_x, *max_x, *min_y, *max_y;
 		min_x = (float*)malloc(sizeof(float));
 		max_x = (float*)malloc(sizeof(float));
 		min_y = (float*)malloc(sizeof(float));
 		max_y = (float*)malloc(sizeof(float));
-		// // cudaFindMin(position_x, n, min_x);
-		// // cudaFindMax(position_x, n, max_x);
-		// // cudaFindMin(position_y, n, min_y);
-		// // cudaFindMax(position_y, n, max_y);
+		cudaFindMin(position_x, n, min_x);
+		cudaFindMax(position_x, n, max_x);
+		cudaFindMin(position_y, n, min_y);
+		cudaFindMax(position_y, n, max_y);
 
-		// printf("%f %f %f %f\n", *min_x, *min_y, *max_x, *max_y);
+		printf("%f %f %f %f\n", *min_x, *min_y, *max_x, *max_y);
 		printf("1\n");
-		// for (int i = 0; i < n; i++) {
-		// 	// vector_t mins = {min_x, min_y};
-		// 	boxes[i].bl = {*min_x, *min_y};
-		// 	// vector_t maxs = {max_x, max_y};
-		// 	boxes[i].tr = {*max_x, *max_y};
-		// }
+		for (int i = 0; i < n; i++) {
+			// vector_t mins = {min_x, min_y};
+			boxes[i].bl = {*min_x, *min_y};
+			// vector_t maxs = {max_x, max_y};
+			boxes[i].tr = {*max_x, *max_y};
+		}
 
 		// float centre_x = get_centre_x(*min_x, *max_x);
 		// float centre_y = get_centre_y(*min_y, *max_y);
