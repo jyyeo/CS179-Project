@@ -7,7 +7,7 @@
 int main(void) {
 	int size = 10;
 	float *arr;
-	float *max_val;
+	float *max_val = 0.0;
 
 	arr = (float*)malloc(size * sizeof(float));
 	max_val = (float*)malloc(sizeof(float));
