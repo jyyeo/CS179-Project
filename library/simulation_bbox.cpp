@@ -97,10 +97,10 @@ int	main(int argc, char const *argv[])
 
 		// cuda call for find min and find max
 		float *min_x, *max_x, *min_y, *max_y;
-		// min_x = (float*)malloc(sizeof(float));
-		// max_x = (float*)malloc(sizeof(float));
-		// min_y = (float*)malloc(sizeof(float));
-		// max_y = (float*)malloc(sizeof(float));
+		min_x = (float*)malloc(sizeof(float));
+		max_x = (float*)malloc(sizeof(float));
+		min_y = (float*)malloc(sizeof(float));
+		max_y = (float*)malloc(sizeof(float));
 		// cudaFindMin(position_x, n, min_x);
 		// cudaFindMax(position_x, n, max_x);
 		// cudaFindMin(position_y, n, min_y);
@@ -108,12 +108,12 @@ int	main(int argc, char const *argv[])
 
 		// printf("%f %f %f %f\n", *min_x, *min_y, *max_x, *max_y);
 
-		for (int i = 0; i < n; i++) {
-			// vector_t mins = {min_x, min_y};
-			boxes[i].bl = {*min_x, *min_y};
-			// vector_t maxs = {max_x, max_y};
-			boxes[i].tr = {*max_x, *max_y};
-		}
+		// for (int i = 0; i < n; i++) {
+		// 	// vector_t mins = {min_x, min_y};
+		// 	boxes[i].bl = {*min_x, *min_y};
+		// 	// vector_t maxs = {max_x, max_y};
+		// 	boxes[i].tr = {*max_x, *max_y};
+		// }
 
 		// float centre_x = get_centre_x(*min_x, *max_x);
 		// float centre_y = get_centre_y(*min_y, *max_y);
