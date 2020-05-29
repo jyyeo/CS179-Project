@@ -79,6 +79,8 @@ int	main(int argc, char const *argv[])
 		float min_y = get_min_y(bodies, n);
 		float max_y = get_max_y(bodies, n);
 
+		printf("%f %f %f %f\n", min_x, min_y, max_x, max_y);
+
 		// calculate bounding boxes for each body (GPU)
 		// organize data for GPU
 		float *position_x;
@@ -97,8 +99,10 @@ int	main(int argc, char const *argv[])
 		float *min_x, *max_x, *min_y, *max_y;
 		cudaFindMin(position_x, n, min_x);
 		cudaFindMax(position_x, n, max_x);
+		cudaFindMin(position_y, n, min_y);
+		cudaFindMax(position_y, n, max_y);
 
-
+		printf("%f %f %f %f\n", min_x, min_y, max_x, max_y);
 
 		for (int i = 0; i < n; i++) {
 			boxes[i].bl = {min_x, min_y};

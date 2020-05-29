@@ -1,6 +1,6 @@
-#ifndef CUDA_FINDMAX_CUH
-#define CUDA_FINDMAX_CUH
+#ifndef CUDA_FINDMIN_CUH
+#define CUDA_FINDMIN_CUH
 
-void cudaFindMax(float *dev_arr, int size, float *dev_min_val);
+void cudaFindMin(float *arr, int size, float *min_val);
 
 #endif
