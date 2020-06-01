@@ -109,12 +109,12 @@ BHTree* update_quad (BHTree *tree, Body b) {
 		updated_tree->NE = construct_tree(tree->NE, b);
 	}
 	else if (check_quad(tree, b) == 3) { // SW
-		tree->SW = initialize_quads(tree.SW);
-		updated_tree.SW = construct_tree(tree->SW, b);
+		tree->SW = initialize_quads(tree->SW);
+		updated_tree->SW = construct_tree(tree->SW, b);
 	}
 	else { //SE
-		tree->SE = initialize_quads(tree.SE);
-		updated_tree.SE = construct_tree(tree->SE, b);
+		tree->SE = initialize_quads(tree->SE);
+		updated_tree->SE = construct_tree(tree->SE, b);
 	}
 	return updated_tree;
 }
@@ -136,10 +136,10 @@ BHTree* construct_tree (BHTree *tree, Body b) {
 		updated_tree = update_quad(tree, b);
 	}
 
-	(updated_tree.body).mass = update_mass(tree, b);
-	(updated_tree.body).position = update_position(tree, b);
+	(updated_tree->body).mass = update_mass(tree, b);
+	(updated_tree->body).position = update_position(tree, b);
 	
-	return *updated_tree;
+	return updated_tree;
 }
 
 
