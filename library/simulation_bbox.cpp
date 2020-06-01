@@ -109,14 +109,9 @@ int	main(int argc, char const *argv[])
 		printf("%f %f %f %f\n", *min_x, *min_y, *max_x, *max_y);
 
 		for (int i = 0; i < n; i++) {
-			// vector_t mins = {min_x, min_y};
 			boxes[i].bl = {*min_x, *min_y};
-			// vector_t maxs = {max_x, max_y};
 			boxes[i].tr = {*max_x, *max_y};
 		}
-
-		// float centre_x = get_centre_x(*min_x, *max_x);
-		// float centre_y = get_centre_y(*min_y, *max_y);
 
 		// insert bodies into octants
 		
@@ -174,8 +169,8 @@ int	main(int argc, char const *argv[])
 		 	float_arr[3] = to_string(get_velocity(bodies[i]).y);
 		 	float_arr[4] = to_string(get_mass(bodies[i]));
 		 	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3] + " " + float_arr[4];
-		 	cout << output_line << "\n";
-			// output_file << output_line << "\n";
+		 	// cout << output_line << "\n";
+			output_file << output_line << "\n";
 		}
 		
 		output_file << "\n";
