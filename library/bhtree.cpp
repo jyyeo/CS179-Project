@@ -102,21 +102,21 @@ BHTree* update_quad (BHTree *tree, Body b) {
 	BHTree *updated_tree;
 	if (check_quad(tree, b) == 1) { // NW
 		tree->NW = initialize_quads(tree->NW);
-		*updated_tree->NW = construct_tree(tree->NW, b);
+		updated_tree->NW = construct_tree(tree->NW, b);
 	}
 	else if (check_quad(tree, b) == 2) { //NE
 		tree->NE = initialize_quads(tree->NE);
-		*updated_tree->NE = construct_tree(tree->NE, b);
+		updated_tree->NE = construct_tree(tree->NE, b);
 	}
 	else if (check_quad(tree, b) == 3) { // SW
 		tree->SW = initialize_quads(tree.SW);
-		*updated_tree.SW = construct_tree(tree->SW, b);
+		updated_tree.SW = construct_tree(tree->SW, b);
 	}
 	else { //SE
 		tree->SE = initialize_quads(tree.SE);
-		*updated_tree.SE = construct_tree(tree->SE, b);
+		updated_tree.SE = construct_tree(tree->SE, b);
 	}
-	return *updated_tree;
+	return updated_tree;
 }
 
 BHTree* construct_tree (BHTree *tree, Body b) {
