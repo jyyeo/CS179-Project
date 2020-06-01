@@ -29,10 +29,10 @@ BHTree insert_body (BHTree tree, Body b) {
 }
 
 bool is_internal_node (BHTree tree) {
-	return (get_mass(get_body(tree.NW)) != 0.0 ||
-		    get_mass(get_body(tree.NE)) != 0.0 ||
-		    get_mass(get_body(tree.SW)) != 0.0 ||
-		    get_mass(get_body(tree.SE)) != 0.0);
+	return (get_mass(get_body(tree->NW)) != 0.0 ||
+		    get_mass(get_body(tree->NE)) != 0.0 ||
+		    get_mass(get_body(tree->SW)) != 0.0 ||
+		    get_mass(get_body(tree->SE)) != 0.0);
 }
 
 float update_mass (BHTree tree, Body b) {
