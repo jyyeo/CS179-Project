@@ -23,7 +23,7 @@ bool contain_body (BHTree tree) {
 	}
 }
 
-BHTree insert_body (BHTree tree, Body b) {
+BHTree* insert_body (BHTree tree, Body b) {
 	tree.body = b;
 	return tree;
 }
@@ -72,33 +72,33 @@ int check_quad (BHTree *tree, Body b) {
 	}
 }
 
-BHTree initialize_quads (BHTree *tree) {
+BHTree* initialize_quads (BHTree *tree) {
 	BHTree *updated_tree;
 	
-	((updated_tree.NW).bbox).bl = 
-		{((tree.bbox).bl).x, get_centre_y(get_bbox(tree))};
-	((updated_tree.NW).bbox).tr = 
+	((updated_tree->NW).bbox).bl = 
+		{((tree->bbox).bl).x, get_centre_y(get_bbox(tree))};
+	((updated_tree->NW).bbox).tr = 
 		{get_centre_x(get_bbox(tree)), ((get_bbox(tree)).tr).y};
 	
-	((updated_tree.NE).bbox).bl =
+	((updated_tree->NE).bbox).bl =
 		{get_centre_x(get_bbox(tree)), get_centre_y(get_bbox(tree));
-	((updated_tree.NE).bbox).tr =
+	((updated_tree->NE).bbox).tr =
 		get_bbox(tree).tr;
 	
-	((updated_tree.SW).bbox).bl =
+	((updated_tree->SW).bbox).bl =
 		get_bbox(tree).bl;
-	((updated_tree.SW).bbox).tr =
+	((updated_tree->SW).bbox).tr =
 		{get_centre_x(get_bbox(tree)), get_centre_y(get_bbox(tree));
 
-	((updated_tree.SE).bbox).bl =
+	((updated_tree->SE).bbox).bl =
 		{get_centre_x(get_bbox(tree)), ((tree.bbox).bl).y};
-	((updated_tree.SE).bbox).tr =
+	((updated_tree->SE).bbox).tr =
 		{(get_bbox(tree).tr).x, get_centre_y(get_bbox(tree))};
 
 	return *updated_tree;
 }
 
-BHTree update_quad (BHTree *tree, Body b) {
+BHTree* update_quad (BHTree *tree, Body b) {
 	BHTree *updated_tree;
 	if (check_quad(tree, b) == 1) { // NW
 		tree.NW = initialize_quads(tree.NW);
@@ -119,7 +119,7 @@ BHTree update_quad (BHTree *tree, Body b) {
 	return *updated_tree;
 }
 
-BHTree construct_tree (BHTree *tree, Body b) {
+BHTree* construct_tree (BHTree *tree, Body b) {
 	BHTree *updated_tree;
 	// does not contain a body
 	if (contain_body(tree) == false) {
