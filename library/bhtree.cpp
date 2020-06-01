@@ -42,15 +42,15 @@ bool equal_bhtree (BHTree *tree1, BHTree *tree2) {
 
 BHTree* initialize_tree_to (BHTree *tree) {
 	BHTree *new_tree;
-	(*new_tree->body).mass = get_mass(tree->body);
-	((*new_tree->body).position).x = get_position(tree->body).x;
-	((*new_tree->body).position).y = get_position(tree->body).y;
-	((*new_tree->body).velocity).x = get_velocity(tree->body).x;
-	((*new_tree->body).velocity).y = get_velocity(tree->body).y;
-	((*new_tree->bbox).bl).x = (get_bbox(tree).bl).x;
-	((*new_tree->bbox).bl).y = (get_bbox(tree).bl).y;
-	((*new_tree->bbox).tr).x = (get_bbox(tree).tr).x;
-	((*new_tree->bbox).tr).y = (get_bbox(tree).tr).y;
+	(new_tree->body).mass = get_mass(tree->body);
+	((new_tree->body).position).x = get_position(tree->body).x;
+	((new_tree->body).position).y = get_position(tree->body).y;
+	((new_tree->body).velocity).x = get_velocity(tree->body).x;
+	((new_tree->body).velocity).y = get_velocity(tree->body).y;
+	((new_tree->bbox).bl).x = (get_bbox(tree).bl).x;
+	((new_tree->bbox).bl).y = (get_bbox(tree).bl).y;
+	((new_tree->bbox).tr).x = (get_bbox(tree).tr).x;
+	((new_tree->bbox).tr).y = (get_bbox(tree).tr).y;
 	return new_tree;
 }
 BHTree* insert_body (BHTree *tree, Body b) {
