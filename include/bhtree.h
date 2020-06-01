@@ -5,13 +5,15 @@
 #include "mechanics.h"
 #include "bbox.h"
 
-typedef struct {
+struct BHTree;
+
+typedef struct BHTree {
 	Body body;
 	Bbox bbox;
-	BHTree NW;
-	BHTree NE;
-	BHTree SW;
-	BHTree SE;
+	struct BHTree *NW;
+	struct BHTree *NE;
+	struct BHTree *SW;
+	struct BHTree *SE;
 } BHTree;
 
 Body get_body (BHTree tree);
@@ -35,7 +37,5 @@ BHTree initialize_quads (BHTree tree);
 BHTree update_quad (BHTree tree, Body b);
 
 BHTree construct_tree (BHTree tree, Body b);
-
-
 
 #endif

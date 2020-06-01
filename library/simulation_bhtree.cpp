@@ -122,6 +122,8 @@ int	main(int argc, char const *argv[])
 		for (int i = 0; i < n, i++) {
 			tree = construct_tree (tree, bodies[i]);
 		}
+
+		printf("%s\n", );
 		
 		// calculate acceleration on each body, update position and velocity
 		float acc_x[n];
