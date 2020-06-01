@@ -76,7 +76,7 @@ int	main(int argc, char const *argv[])
 	for (int t = 0; t < timestep; t++) {
 
 	// calculate bounding boxes for each body (CPU)
-		Bbox boxes[n];
+		// Bbox boxes[n];
 		float min_x_cpu = get_min_x(bodies, n);
 		float max_x_cpu = get_max_x(bodies, n);
 		float min_y_cpu = get_min_y(bodies, n);
@@ -117,10 +117,10 @@ int	main(int argc, char const *argv[])
 		
 		(tree->bbox).bl = {*min_x, *min_y};
 		(tree->bbox).tr = {*max_x, *max_y};
-		*tree = initialize_quads(tree);
+		tree = initialize_quads(tree);
 
 		for (int i = 0; i < n; i++) {
-			*tree = construct_tree(tree, bodies[i]);
+			tree = construct_tree(tree, bodies[i]);
 		}
 		
 		// calculate acceleration on each body, update position and velocity
