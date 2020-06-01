@@ -7,7 +7,7 @@ CUDA_LIB_PATH   ?= $(CUDA_PATH)/lib
 
 CFLAGS = -I$(CUDA_INC_PATH) -L$(CUDA_LIB_PATH) -lcudart
 
-LIBS = vector mechanics data bbox bhtree
+LIBS = vector mechanics data bbox
 OBJS = $(addprefix out/,$(LIBS:=.o))
 
 C_LIBS = saxpy findMin findMax
@@ -15,7 +15,7 @@ C_OBJS = $(addprefix out/,$(C_LIBS:=.o))
 
 all: cpu gpu
 
-gpu: $(OBJS) $(C_OBJS) library/simulation_bhtree.cpp
+gpu: $(OBJS) $(C_OBJS) library/simulation_bbox.cpp
 	$(CC) -o bins/gpu_run $^ $(CFLAGS) $(CPPFLAGS)
 
 cpu: out/mechanics.o out/vector.o library/simulation_cpu.cpp

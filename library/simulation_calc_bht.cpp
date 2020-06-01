@@ -133,7 +133,8 @@ int	main(int argc, char const *argv[])
 		
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
-				vector_t total_acc = acc_on(bodies[i], bodies[j]);
+				// vector_t total_acc = acc_on(bodies[i], bodies[j]);
+				vector_t total_acc = bht_acc_on(tree, bodies[i], bodies[j]);
 				acc_x[i] += total_acc.x;
 				acc_y[i] += total_acc.y;
 			}
