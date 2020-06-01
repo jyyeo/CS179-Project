@@ -55,17 +55,18 @@ int check_quad (BHTree *tree, Body b) {
 			return 1;
 		}
 	}
-	if (get_position(b).x > get_centre_x(get_bbox(tree))) { // East
+	else if (get_position(b).x > get_centre_x(get_bbox(tree))) { // East
 		if (get_position(b).y > get_centre_y(get_bbox(tree))) { //North
 			return 2;
 		}
 	}
-	if (get_position(b).x < get_centre_x(get_bbox(tree))) { // West
+	else if (get_position(b).x < get_centre_x(get_bbox(tree))) { // West
 		if (get_position(b).y < get_centre_y(get_bbox(tree))) { //South
 			return 3;
 		}
 	}
-	if (get_position(b).x > get_centre_x(get_bbox(tree))) { // East
+	else {
+	// if (get_position(b).x > get_centre_x(get_bbox(tree))) { // East
 		if (get_position(b).y < get_centre_y(get_bbox(tree))) { //South
 			return 4;
 		}

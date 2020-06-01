@@ -115,11 +115,11 @@ int	main(int argc, char const *argv[])
 		// insert bodies into tree
 		BHTree *tree;
 		
-		(*tree.bbox).bl = {*min_x, *min_y};
-		(*tree.bbox).tr = {*max_x, *max_y};
-		*tree = initialize_quads(*tree);
+		(*tree->bbox).bl = {*min_x, *min_y};
+		(*tree->bbox).tr = {*max_x, *max_y};
+		*tree = initialize_quads(tree);
 
-		for (int i = 0; i < n, i++) {
+		for (int i = 0; i < n; i++) {
 			*tree = construct_tree (tree, bodies[i]);
 		}
 		
