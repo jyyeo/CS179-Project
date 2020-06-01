@@ -16,26 +16,26 @@ struct BHTree {
 	struct BHTree* SE;
 };
 
-Body get_body (BHTree tree);
+Body get_body (BHTree *tree);
 
-Bbox get_bbox (BHTree tree);
+Bbox get_bbox (BHTree *tree);
 
-bool contain_body (BHTree tree);
+bool contain_body (BHTree *tree);
 
-BHTree insert_body (BHTree tree, Body b);
+BHTree* insert_body (BHTree *tree, Body b);
 
-bool is_internal_node (BHTree tree);
+bool is_internal_node (BHTree *tree);
 
-float update_mass (BHTree tree, Body b);
+float update_mass (BHTree *tree, Body b);
 
-vector_t update_position (BHTree tree, Body b);
+vector_t update_position (BHTree *tree, Body b);
 
-int check_quad (BHTree tree, Body b);
+int check_quad (BHTree *tree, Body b);
 
-BHTree initialize_quads (BHTree tree);
+BHTree* initialize_quads (BHTree *tree);
 
-BHTree update_quad (BHTree tree, Body b);
+BHTree* update_quad (BHTree *tree, Body b);
 
-BHTree construct_tree (BHTree tree, Body b);
+BHTree* construct_tree (BHTree *tree, Body b);
 
 #endif
