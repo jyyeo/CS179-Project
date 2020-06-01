@@ -7,14 +7,14 @@
 
 struct BHTree;
 
-typedef struct BHTree {
+struct BHTree {
 	Body body;
 	Bbox bbox;
-	struct BHTree *NW;
-	struct BHTree *NE;
-	struct BHTree *SW;
-	struct BHTree *SE;
-} BHTree;
+	struct BHTree* NW;
+	struct BHTree* NE;
+	struct BHTree* SW;
+	struct BHTree*SE;
+};
 
 Body get_body (BHTree tree);
 
