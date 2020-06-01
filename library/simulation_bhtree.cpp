@@ -114,15 +114,15 @@ int	main(int argc, char const *argv[])
 	// construct Barnes-Hut tree
 		// insert bodies into tree
 		BHTree *tree;
-		
+		printf("1\n");
 		(tree->bbox).bl = {*min_x, *min_y};
 		(tree->bbox).tr = {*max_x, *max_y};
 		tree = initialize_quads(tree);
-
+		printf("2\n");
 		for (int i = 0; i < n; i++) {
 			tree = construct_tree(tree, bodies[i]);
 		}
-		
+		printf("3\n");
 		// calculate acceleration on each body, update position and velocity
 		float acc_x[n];
 		float acc_y[n];
