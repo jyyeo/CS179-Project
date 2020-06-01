@@ -7,15 +7,15 @@
 #include "bhtree.h"
 
 Body get_body (BHTree *tree) {
-	return *tree->body;
+	return tree->body;
 }
 
 Bbox get_bbox (BHTree *tree) {
-	return *tree->bbox;
+	return tree->bbox;
 }
 
 bool contain_body (BHTree *tree) {
-	if (get_mass(*tree->body) == 0) {
+	if (get_mass(tree->body) == 0) {
 		return false;
 	}
 	else {
@@ -24,15 +24,15 @@ bool contain_body (BHTree *tree) {
 }
 
 BHTree* insert_body (BHTree *tree, Body b) {
-	*tree->body = b;
-	return *tree;
+	tree->body = b;
+	return tree;
 }
 
 bool is_internal_node (BHTree *tree) {
-	return (get_mass(get_body(*tree->NW)) != 0.0 ||
-		    get_mass(get_body(*tree->NE)) != 0.0 ||
-		    get_mass(get_body(*tree->SW)) != 0.0 ||
-		    get_mass(get_body(*tree->SE)) != 0.0);
+	return (get_mass(get_body(tree->NW)) != 0.0 ||
+		    get_mass(get_body(tree->NE)) != 0.0 ||
+		    get_mass(get_body(tree->SW)) != 0.0 ||
+		    get_mass(get_body(tree->SE)) != 0.0);
 }
 
 float update_mass (BHTree *tree, Body b) {
@@ -76,7 +76,7 @@ BHTree* initialize_quads (BHTree *tree) {
 	BHTree *updated_tree;
 	
 	((*updated_tree->NW).bbox).bl = 
-		{((*tree->bbox).bl).x, get_centre_y(get_bbox(tree))};
+		{((tree->bbox).bl).x, get_centre_y(get_bbox(tree))};
 	((*updated_tree->NW).bbox).tr = 
 		{get_centre_x(get_bbox(tree)), ((get_bbox(tree)).tr).y};
 	
