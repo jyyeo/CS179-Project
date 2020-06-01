@@ -13,7 +13,7 @@ struct BHTree {
 	struct BHTree* NW;
 	struct BHTree* NE;
 	struct BHTree* SW;
-	struct BHTree*SE;
+	struct BHTree* SE;
 };
 
 Body get_body (BHTree tree);
