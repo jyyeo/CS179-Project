@@ -115,43 +115,43 @@ int	main(int argc, char const *argv[])
 			boxes[i].tr = {*max_x, *max_y};
 		}
 
-	// update values using CPU
-		vector_t acc[n];
-		for (int i = 0; i < n; i++) {
-			acc[i].x = 0.0;
-			acc[i].y = 0.0;
-		}
-		for (int i = 0; i < n; i++) {
-			updateBody(bodies[i], acc[i], timestep);
-		}
-		// output to txt file
-		for (int i = 0; i < n; i++) {
-		 	string float_arr[5];
-		 	float_arr[0] = to_string(get_position(bodies[i]).x);
-		 	float_arr[1] = to_string(get_position(bodies[i]).y);
-		 	float_arr[2] = to_string(get_velocity(bodies[i]).x);
-		 	float_arr[3] = to_string(get_velocity(bodies[i]).y);
-		 	float_arr[4] = to_string(get_mass(bodies[i]));
-		 	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3] + " " + float_arr[4];
-		 	// cout << output_line << "\n";
-			output_file_cpu << output_line << "\n";
-		}
+	// // update values using CPU
+	// 	vector_t acc[n];
+	// 	for (int i = 0; i < n; i++) {
+	// 		acc[i].x = 0.0;
+	// 		acc[i].y = 0.0;
+	// 	}
+	// 	for (int i = 0; i < n; i++) {
+	// 		updateBody(bodies[i], acc[i], timestep);
+	// 	}
+	// 	// output to txt file
+	// 	for (int i = 0; i < n; i++) {
+	// 	 	string float_arr[5];
+	// 	 	float_arr[0] = to_string(get_position(bodies[i]).x);
+	// 	 	float_arr[1] = to_string(get_position(bodies[i]).y);
+	// 	 	float_arr[2] = to_string(get_velocity(bodies[i]).x);
+	// 	 	float_arr[3] = to_string(get_velocity(bodies[i]).y);
+	// 	 	float_arr[4] = to_string(get_mass(bodies[i]));
+	// 	 	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3] + " " + float_arr[4];
+	// 	 	// cout << output_line << "\n";
+	// 		output_file_cpu << output_line << "\n";
+	// 	}
 				
-		// calculate acceleration on each body, update position and velocity
-		float acc_x[n];
-		float acc_y[n];
-		for (int i = 0; i < n; i++) {
-			acc_x[i] = 0.0;
-			acc_y[i] = 0.0;
-		}
+	// 	// calculate acceleration on each body, update position and velocity
+	// 	float acc_x[n];
+	// 	float acc_y[n];
+	// 	for (int i = 0; i < n; i++) {
+	// 		acc_x[i] = 0.0;
+	// 		acc_y[i] = 0.0;
+	// 	}
 		
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
-				vector_t total_acc = acc_on(bodies[i], bodies[j]);
-				acc_x[i] += total_acc.x;
-				acc_y[i] += total_acc.y;
-			}
-		}
+	// 	for (int i = 0; i < n; i++) {
+	// 		for (int j = 0; j < n; j++) {
+	// 			vector_t total_acc = acc_on(bodies[i], bodies[j]);
+	// 			acc_x[i] += total_acc.x;
+	// 			acc_y[i] += total_acc.y;
+	// 		}
+	// 	}
 
 	// update values using GPU
 		// organize data for GPU
