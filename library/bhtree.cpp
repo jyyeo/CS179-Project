@@ -96,7 +96,7 @@ BHTree* initialize_quads (BHTree *tree) {
 		{get_centre_x(get_bbox(tree)), ((tree->bbox).bl).y};
 	((*updated_tree->SE).bbox).tr =
 		{(get_bbox(tree).tr).x, get_centre_y(get_bbox(tree))};
-
+	printf("1.5\n");
 	return updated_tree;
 }
 
