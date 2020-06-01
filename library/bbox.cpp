@@ -50,13 +50,13 @@ float get_max_y(Body bodies[], int n) {
 }
 
 float get_centre_x (Bbox bbox) {
-	max_x = (bbox.tr).x;
-	min_x = (bbox.bl).x;
+	float max_x = (bbox.tr).x;
+	float min_x = (bbox.bl).x;
 	return max_x - 0.5 * (max_x - min_x);
 }
 
 float get_centre_y (Bbox bbox) {
-	max_y = (bbox.tr).y;
-	min_y = (bbox.bl).y;
+	float max_y = (bbox.tr).y;
+	float min_y = (bbox.bl).y;
 	return max_y - 0.5 * (max_y - min_y);
 } 
