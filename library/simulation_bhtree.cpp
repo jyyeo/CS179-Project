@@ -117,13 +117,11 @@ int	main(int argc, char const *argv[])
 		
 		(*tree.bbox).bl = {*min_x, *min_y};
 		(*tree.bbox).tr = {*max_x, *max_y};
-		tree = initialize_quads(*tree);
+		*tree = initialize_quads(*tree);
 
 		for (int i = 0; i < n, i++) {
-			tree = construct_tree (tree, bodies[i]);
+			*tree = construct_tree (tree, bodies[i]);
 		}
-
-		printf("%s\n", );
 		
 		// calculate acceleration on each body, update position and velocity
 		float acc_x[n];

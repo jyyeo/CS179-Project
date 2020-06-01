@@ -6,16 +6,16 @@
 #include "bbox.h"
 #include "bhtree.h"
 
-Body get_body (BHTree tree) {
-	return tree.body;
+Body get_body (BHTree *tree) {
+	return *tree->body;
 }
 
-Bbox get_bbox (BHTree tree) {
-	return tree.bbox;
+Bbox get_bbox (BHTree *tree) {
+	return *tree->bbox;
 }
 
-bool contain_body (BHTree tree) {
-	if ((tree.body).mass == 0) {
+bool contain_body (BHTree *tree) {
+	if (get_mass(*tree->body) == 0) {
 		return false;
 	}
 	else {
@@ -24,7 +24,7 @@ bool contain_body (BHTree tree) {
 }
 
 BHTree* insert_body (BHTree *tree, Body b) {
-	tree->body = b;
+	*tree->body = b;
 	return *tree;
 }
 
@@ -76,8 +76,8 @@ BHTree* initialize_quads (BHTree *tree) {
 	BHTree *updated_tree;
 	
 	((*updated_tree->NW).bbox).bl = 
-		{((tree->bbox)->bl).x, get_centre_y(get_bbox(tree))};
-	((*updated_tree->NW)->bbox).tr = 
+		{((*tree->bbox).bl).x, get_centre_y(get_bbox(tree))};
+	((*updated_tree->NW).bbox).tr = 
 		{get_centre_x(get_bbox(tree)), ((get_bbox(tree)).tr).y};
 	
 	((*updated_tree->NE)->bbox).bl =
