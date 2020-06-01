@@ -80,22 +80,22 @@ BHTree* initialize_quads (BHTree *tree) {
 	((*updated_tree->NW).bbox).tr = 
 		{get_centre_x(get_bbox(tree)), ((get_bbox(tree)).tr).y};
 	
-	((*updated_tree->NE)->bbox).bl =
+	((*updated_tree->NE).bbox).bl =
 		{get_centre_x(get_bbox(tree)), get_centre_y(get_bbox(tree))};
 	((*updated_tree->NE)->bbox).tr =
 		get_bbox(tree).tr;
 	
-	((*updated_tree->SW)->bbox).bl =
+	((*updated_tree->SW).bbox).bl =
 		get_bbox(tree).bl;
-	((*updated_tree->SW)->bbox).tr =
+	((*updated_tree->SW).bbox).tr =
 		{get_centre_x(get_bbox(tree)), get_centre_y(get_bbox(tree))};
 
-	((*updated_tree->SE)->bbox).bl =
+	((*updated_tree->SE).bbox).bl =
 		{get_centre_x(get_bbox(tree)), ((tree->bbox).bl).y};
-	((*updated_tree->SE)->bbox).tr =
+	((*updated_tree->SE).bbox).tr =
 		{(get_bbox(tree).tr).x, get_centre_y(get_bbox(tree))};
 
-	return *updated_tree;
+	return updated_tree;
 }
 
 BHTree* update_quad (BHTree *tree, Body b) {
