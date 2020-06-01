@@ -76,7 +76,7 @@ int check_quad (BHTree *tree, Body b) {
 
 BHTree* initialize_quads (BHTree *tree) {
 	BHTree *updated_tree = tree;
-	
+	printf("1.5\n");
 	((*updated_tree->NW).bbox).bl = 
 		{((tree->bbox).bl).x, get_centre_y(get_bbox(tree))};
 	((*updated_tree->NW).bbox).tr = 
@@ -96,7 +96,6 @@ BHTree* initialize_quads (BHTree *tree) {
 		{get_centre_x(get_bbox(tree)), ((tree->bbox).bl).y};
 	((*updated_tree->SE).bbox).tr =
 		{(get_bbox(tree).tr).x, get_centre_y(get_bbox(tree))};
-	printf("1.5\n");
 	return updated_tree;
 }
 
