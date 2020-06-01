@@ -67,21 +67,23 @@ int	main(int argc, char const *argv[])
 	}
 
 	input_file.close();
-	ofstream output_file;
-	output_file.open("output.txt");
+	ofstream output_file_gpu;
+	ofstream output_file_cpu;
+	output_file_gpu.open("output_gpu.txt");
+	output_file_cpu.open("output_cpu.txt");
 
 	for (int t = 0; t < timestep; t++) {
 
-		// calculate bounding boxes for each body (CPU)
+	// calculate bounding boxes for each body (CPU)
 		Bbox boxes[n];
 		float min_x_cpu = get_min_x(bodies, n);
 		float max_x_cpu = get_max_x(bodies, n);
 		float min_y_cpu = get_min_y(bodies, n);
 		float max_y_cpu = get_max_y(bodies, n);
 
-		printf("%f %f %f %f\n", min_x_cpu, min_y_cpu, max_x_cpu, max_y_cpu);
+		printf("CPU: %f %f %f %f\n", min_x_cpu, min_y_cpu, max_x_cpu, max_y_cpu);
 
-		// calculate bounding boxes for each body (GPU)
+	// calculate bounding boxes for each body (GPU)
 		// organize data for GPU
 		float *position_x;
 		position_x = (float*)malloc(n * sizeof(float));
@@ -106,15 +108,12 @@ int	main(int argc, char const *argv[])
 		cudaFindMin(position_y, n, min_y);
 		cudaFindMax(position_y, n, max_y);
 
-		printf("%f %f %f %f\n", *min_x, *min_y, *max_x, *max_y);
+		printf("GPU: %f %f %f %f\n", *min_x, *min_y, *max_x, *max_y);
 
 		for (int i = 0; i < n; i++) {
 			boxes[i].bl = {*min_x, *min_y};
 			boxes[i].tr = {*max_x, *max_y};
 		}
-
-		// insert bodies into octants
-		
 		
 		// calculate acceleration on each body, update position and velocity
 		float acc_x[n];
@@ -132,6 +131,23 @@ int	main(int argc, char const *argv[])
 			}
 		}
 
+	// update values using CPU
+		for (int i = 0; i < n; i++) {
+			updateBody(bodies[i], acc[i], timestep);
+		}
+		// output to txt file
+		for (int i = 0; i < n; i++) {
+		 	string float_arr[5];
+		 	float_arr[0] = to_string(get_position(bodies[i]).x);
+		 	float_arr[1] = to_string(get_position(bodies[i]).y);
+		 	float_arr[2] = to_string(get_velocity(bodies[i]).x);
+		 	float_arr[3] = to_string(get_velocity(bodies[i]).y);
+		 	float_arr[4] = to_string(get_mass(bodies[i]));
+		 	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3] + " " + float_arr[4];
+		 	// cout << output_line << "\n";
+			output_file_cpu << output_line << "\n";
+		}
+	// update values using GPU
 		// organize data for GPU
 		extract_position_x (bodies, n, position_x);
 		extract_position_y (bodies, n, position_y);
@@ -170,13 +186,14 @@ int	main(int argc, char const *argv[])
 		 	float_arr[4] = to_string(get_mass(bodies[i]));
 		 	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3] + " " + float_arr[4];
 		 	// cout << output_line << "\n";
-			output_file << output_line << "\n";
+			output_file_gpu << output_line << "\n";
 		}
 		
-		output_file << "\n";
+		output_file_gpu << "\n";
 		printf("timestep %d\n", t);
 	}	
-	output_file.close();
+	output_file_gpu.close();
+	output_file_cpu.close();
 
 
 	return 0;
