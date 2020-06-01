@@ -17,8 +17,8 @@ float get_min_y(Body bodies[], int n);
 
 float get_max_y(Body bodies[], int n);
 
-float get_centre_x (float min_x, float max_x);
+float get_centre_x (Bbox bbox);
 
-float get_centre_y (float min_y, float max_y);
+float get_centre_y (Bbox bbox);
 
 #endif
