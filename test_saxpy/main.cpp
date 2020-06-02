@@ -5,7 +5,7 @@
 #include "saxpy.cuh"
 
 int main(void) {
-	float a;
+	float a = 1.5;
 	float *x, *y;
 	int size = 10;
 
