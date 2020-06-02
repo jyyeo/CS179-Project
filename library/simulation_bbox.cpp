@@ -41,12 +41,12 @@ int	main(int argc, char const *argv[])
 	input_file.open(argv[1]);
 	
 	// get test file number for output file name
-	printf("%s\n", argv[1]);
+	// printf("%s\n", argv[1]);
 	istringstream input_filename(argv[1]);
 	string token;
 	getline(input_filename, token, '.');
 	char file_num = token[token.length()-1];
-	printf("%c\n", file_num);
+	// printf("%c\n", file_num);
 
 	// read data
 	string line;
@@ -79,11 +79,13 @@ int	main(int argc, char const *argv[])
 	input_file.close();
 	ofstream output_file_gpu;
 	ofstream output_file_cpu;
-	string output_filename = "output_gpu__.txt";
-	output_filename[11] = file_num;
+	string output_filename_gpu = "output___gpu.txt";
+	string output_filename_cpu = "output___cpu.txt";
+	output_filename_gpu[7] = file_num;
+	output_filename_cpu[7] = file_num;
 	// output_file_gpu.open("output_gpu.txt");
-	output_file_gpu.open(output_filename);
-	output_file_cpu.open("output_cpu.txt");
+	output_file_gpu.open(output_filename_gpu);
+	output_file_cpu.open(output_filename_cpu);
 
 	for (int t = 0; t < timestep; t++) {
 
@@ -97,6 +99,16 @@ int	main(int argc, char const *argv[])
 		float max_y_cpu = get_max_y(bodies, n);
 
 		// printf("CPU: %f %f %f %f\n", min_x_cpu, min_y_cpu, max_x_cpu, max_y_cpu);
+	
+	// output to txt file
+	 	string float_arr[4];
+	 	float_arr[0] = to_string(min_x_cpu);
+	 	float_arr[1] = to_string(min_y_cpu);
+	 	float_arr[2] = to_string(max_x_cpu);
+	 	float_arr[3] = to_string(max_y_cpu);
+	 	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3];
+	 	// cout << output_line << "\n";
+		output_file_cpu << output_line << "\n";
 
 	// calculate bounding boxes for each body (GPU)
 		// organize data for GPU
@@ -124,6 +136,16 @@ int	main(int argc, char const *argv[])
 		cudaFindMax(position_y, n, max_y);
 
 		// printf("GPU: %f %f %f %f\n", *min_x, *min_y, *max_x, *max_y);
+
+	// output to txt file
+	 	string float_arr[4];
+	 	float_arr[0] = to_string(*min_x);
+	 	float_arr[1] = to_string(*min_y);
+	 	float_arr[2] = to_string(*max_x);
+	 	float_arr[3] = to_string(*max_y);
+	 	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3];
+	 	// cout << output_line << "\n";
+	 	output_file_gpu << output_line << "\n";
 
 		for (int i = 0; i < n; i++) {
 			boxes[i].bl = {*min_x, *min_y};
@@ -209,7 +231,7 @@ int	main(int argc, char const *argv[])
 		 	// cout << output_line << "\n";
 			output_file_gpu << output_line << "\n";
 		}
-		
+		output_file_cpu << "\n";
 		output_file_gpu << "\n";
 	}	
 	output_file_gpu.close();
