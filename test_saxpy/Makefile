@@ -13,10 +13,10 @@ CFLAGS = -I$(CUDA_INC_PATH) -L$(CUDA_LIB_PATH) -lcudart
 C_LIBS = saxpy
 C_OBJS = $(addprefix out/,$(C_LIBS:=.o))
 
-all: findMin
+all: saxpy
 
-findMin: $(OBJS) $(C_OBJS) test_saxpy/main.cpp
-	$(CC) -o findMin $^ $(CFLAGS) $(CPPFLAGS)
+saxpy: $(OBJS) $(C_OBJS) test_saxpy/main.cpp
+	$(CC) -o saxpy $^ $(CFLAGS) $(CPPFLAGS)
 
 # cpu: out/mechanics.o out/vector.o library/simulation_cpu.cpp
 # 	$(CC) -o bins/cpu_run $^ $(CPPFLAGS)
