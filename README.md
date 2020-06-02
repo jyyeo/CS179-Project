@@ -68,7 +68,12 @@ CPU: 2.250000  4.750000  7.250000  9.750000  12.250000  14.750000  17.250000  19
 GPU: 2.250000  4.750000  7.250000  9.750000  12.250000  14.750000  17.250000  19.750000  22.250000  24.750000
 
 ##findMax.cu
-
+This module finds the maximum element within a vector, using GPU. To test this module on its own, from the main directory, run:
+Expected output:
+CPU: 1.500000 3.000000 4.500000 6.000000 7.500000 9.000000 10.500000 12.000000 13.500000 15.000000
+GPU: 1.500000 3.000000 4.500000 6.000000 7.500000 9.000000 10.500000 12.000000 13.500000 15.000000
+completed
+15.000000
 
 ##findMin.cu
 This module finds the minimum element within a vector, using GPU. To test this module on its own, from the main directory, run:
@@ -78,6 +83,8 @@ This module finds the minimum element within a vector, using GPU. To test this m
 Expected output:
 CPU: 7.500000 6.000000 4.500000 3.000000 1.500000 0.000000 -1.500000 -3.000000 -4.500000 -6.000000
 GPU: 7.500000 6.000000 4.500000 3.000000 1.500000 0.000000 -1.500000 -3.000000 -4.500000 -6.000000
+completed
+-6.000000
 
 
 	

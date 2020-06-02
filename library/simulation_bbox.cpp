@@ -19,6 +19,7 @@
 
 using std::cerr;
 using std::string;
+using std::getline;
 using std::ifstream;
 using std::ofstream;
 using std::cout;
@@ -37,6 +38,10 @@ int	main(int argc, char const *argv[])
 	// open file, while contains data
 	ifstream input_file;
 	input_file.open(argv[1]);
+	string input_filename;
+	getline(argv[1], input_filename, '.');
+	printf("%s\n", input_filename);
+
 
 	// read data
 	string line;
