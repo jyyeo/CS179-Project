@@ -40,8 +40,7 @@ int	main(int argc, char const *argv[])
 	input_file.open(argv[1]);
 	string input_filename;
 	getline(argv[1], input_filename, '.');
-	printf("%s\n", input_filename);
-
+	cout << input_filename << endl;
 
 	// read data
 	string line;
