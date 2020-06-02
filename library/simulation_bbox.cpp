@@ -138,7 +138,7 @@ int	main(int argc, char const *argv[])
 		// printf("GPU: %f %f %f %f\n", *min_x, *min_y, *max_x, *max_y);
 
 	// output to txt file
-	 	string float_arr[4];
+	 	// string float_arr[4];
 	 	float_arr[0] = to_string(*min_x);
 	 	float_arr[1] = to_string(*min_y);
 	 	float_arr[2] = to_string(*max_x);
