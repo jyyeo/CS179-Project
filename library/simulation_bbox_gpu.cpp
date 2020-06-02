@@ -91,8 +91,9 @@ int	main(int argc, char const *argv[])
 		printf("timestep %d\n", t);
 		output_file_gpu << t << "\n";
 
+		Bbox boxes[n];
+
 	// // calculate bounding boxes for each body (CPU)
-	// 	Bbox boxes[n];
 	// 	float min_x_cpu = get_min_x(bodies, n);
 	// 	float max_x_cpu = get_max_x(bodies, n);
 	// 	float min_y_cpu = get_min_y(bodies, n);
