@@ -15,10 +15,10 @@ C_OBJS = $(addprefix out/,$(C_LIBS:=.o))
 
 all: cpu gpu
 
-gpu: $(OBJS) $(C_OBJS) library/simulation_bbox.cpp
+gpu: $(OBJS) $(C_OBJS) library/simulation_bbox_gpu.cpp
 	$(CC) -o bins/gpu_run $^ $(CFLAGS) $(CPPFLAGS)
 
-cpu: out/mechanics.o out/vector.o library/simulation_cpu.cpp
+cpu: out/mechanics.o out/vector.o library/simulation_bbox_cpu.cpp
 	$(CC) -o bins/cpu_run $^ $(CPPFLAGS)
 
 libs: $(OBJS)
@@ -32,7 +32,7 @@ out/%.o: library/%.cu
 clean:
 	rm -f out/* bin/*
 
-test: bins/gpu_run bins/cpu_run
+test: bins/gpu_run bins/cpu_run 
 	./bins/gpu_run test_cases/test2.txt
 	echo "\n"
 	./bins/cpu_run test_cases/test2.txt

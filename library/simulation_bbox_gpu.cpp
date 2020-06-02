@@ -78,37 +78,37 @@ int	main(int argc, char const *argv[])
 	// close input file, open output file
 	input_file.close();
 	ofstream output_file_gpu;
-	ofstream output_file_cpu;
+	// ofstream output_file_cpu;
 	string output_filename_gpu = "output___gpu.txt";
-	string output_filename_cpu = "output___cpu.txt";
+	// string output_filename_cpu = "output___cpu.txt";
 	output_filename_gpu[7] = file_num;
-	output_filename_cpu[7] = file_num;
-	// output_file_gpu.open("output_gpu.txt");
+	// output_filename_cpu[7] = file_num;
 	output_file_gpu.open(output_filename_gpu);
-	output_file_cpu.open(output_filename_cpu);
+	// output_file_cpu.open(output_filename_cpu);
 
 	for (int t = 0; t < timestep; t++) {
 
 		printf("timestep %d\n", t);
+		output_file_gpu << t << "\n";
 
-	// calculate bounding boxes for each body (CPU)
-		Bbox boxes[n];
-		float min_x_cpu = get_min_x(bodies, n);
-		float max_x_cpu = get_max_x(bodies, n);
-		float min_y_cpu = get_min_y(bodies, n);
-		float max_y_cpu = get_max_y(bodies, n);
+	// // calculate bounding boxes for each body (CPU)
+	// 	Bbox boxes[n];
+	// 	float min_x_cpu = get_min_x(bodies, n);
+	// 	float max_x_cpu = get_max_x(bodies, n);
+	// 	float min_y_cpu = get_min_y(bodies, n);
+	// 	float max_y_cpu = get_max_y(bodies, n);
 
-		// printf("CPU: %f %f %f %f\n", min_x_cpu, min_y_cpu, max_x_cpu, max_y_cpu);
+	// 	// printf("CPU: %f %f %f %f\n", min_x_cpu, min_y_cpu, max_x_cpu, max_y_cpu);
 	
-	// output to txt file
-	 	string float_arr[4];
-	 	float_arr[0] = to_string(min_x_cpu);
-	 	float_arr[1] = to_string(min_y_cpu);
-	 	float_arr[2] = to_string(max_x_cpu);
-	 	float_arr[3] = to_string(max_y_cpu);
-	 	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3];
-	 	// cout << output_line << "\n";
-		output_file_cpu << output_line << "\n";
+	// // output to txt file
+	//  	string float_arr[4];
+	//  	float_arr[0] = to_string(min_x_cpu);
+	//  	float_arr[1] = to_string(min_y_cpu);
+	//  	float_arr[2] = to_string(max_x_cpu);
+	//  	float_arr[3] = to_string(max_y_cpu);
+	//  	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3];
+	//  	// cout << output_line << "\n";
+	// 	output_file_cpu << output_line << "\n";
 
 	// calculate bounding boxes for each body (GPU)
 		// organize data for GPU
@@ -138,12 +138,12 @@ int	main(int argc, char const *argv[])
 		// printf("GPU: %f %f %f %f\n", *min_x, *min_y, *max_x, *max_y);
 
 	// output to txt file
-	 	// string float_arr[4];
+	 	string float_arr[4];
 	 	float_arr[0] = to_string(*min_x);
 	 	float_arr[1] = to_string(*min_y);
 	 	float_arr[2] = to_string(*max_x);
 	 	float_arr[3] = to_string(*max_y);
-	 	output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3];
+	 	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3];
 	 	// cout << output_line << "\n";
 	 	output_file_gpu << output_line << "\n";
 
@@ -152,27 +152,27 @@ int	main(int argc, char const *argv[])
 			boxes[i].tr = {*max_x, *max_y};
 		}
 
-	// update values using CPU
-		vector_t acc[n];
-		for (int i = 0; i < n; i++) {
-			acc[i].x = 0.0;
-			acc[i].y = 0.0;
-		}
-		for (int i = 0; i < n; i++) {
-			updateBody(bodies[i], acc[i], timestep);
-		}
-		// output to txt file
-		for (int i = 0; i < n; i++) {
-		 	string float_arr[5];
-		 	float_arr[0] = to_string(get_position(bodies[i]).x);
-		 	float_arr[1] = to_string(get_position(bodies[i]).y);
-		 	float_arr[2] = to_string(get_velocity(bodies[i]).x);
-		 	float_arr[3] = to_string(get_velocity(bodies[i]).y);
-		 	float_arr[4] = to_string(get_mass(bodies[i]));
-		 	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3] + " " + float_arr[4];
-		 	// cout << output_line << "\n";
-			output_file_cpu << output_line << "\n";
-		}
+	// // update values using CPU
+	// 	vector_t acc[n];
+	// 	for (int i = 0; i < n; i++) {
+	// 		acc[i].x = 0.0;
+	// 		acc[i].y = 0.0;
+	// 	}
+	// 	for (int i = 0; i < n; i++) {
+	// 		updateBody(bodies[i], acc[i], timestep);
+	// 	}
+	// 	// output to txt file
+	// 	for (int i = 0; i < n; i++) {
+	// 	 	string float_arr[5];
+	// 	 	float_arr[0] = to_string(get_position(bodies[i]).x);
+	// 	 	float_arr[1] = to_string(get_position(bodies[i]).y);
+	// 	 	float_arr[2] = to_string(get_velocity(bodies[i]).x);
+	// 	 	float_arr[3] = to_string(get_velocity(bodies[i]).y);
+	// 	 	float_arr[4] = to_string(get_mass(bodies[i]));
+	// 	 	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3] + " " + float_arr[4];
+	// 	 	// cout << output_line << "\n";
+	// 		output_file_cpu << output_line << "\n";
+	// 	}
 
 	// update values using GPU
 		// calculate acceleration on each body, update position and velocity
@@ -231,11 +231,11 @@ int	main(int argc, char const *argv[])
 		 	// cout << output_line << "\n";
 			output_file_gpu << output_line << "\n";
 		}
-		output_file_cpu << "\n";
+		// output_file_cpu << "\n";
 		output_file_gpu << "\n";
 	}	
 	output_file_gpu.close();
-	output_file_cpu.close();
+	// output_file_cpu.close();
 
 
 	return 0;
