@@ -36,4 +36,25 @@ This can be done in CPU, as well as in GPU.
 There are several computations that can be done in parallel. For example, in the calculation of the bounding boxes of each body, the minimum and maximum x and y values are computed first, before determining the coordinates of the boxes of each body. This can be done in parallel, by using reduction. Given N values, this would take O(N) time in CPU, because the algorithm will iterate through every body to find the minimum x and y values. In GPU, the algorithm reduces the number of values to compare by half in each iteration, taking O(logN) time in total.
 
 #Code structure
+##vector.h & vector.cpp
+These modules defines a structure, vector_t, and handles vector computations. Vectors are one of the basic structures created. It is used to represent coordinates and velocities. It is used as a constituent of more complex structures, like bodies.
 
+##mechanics.h && mechanics.cpp
+These modules defines a structure, Body, and has functions to calculate the acceleration of one body on another body and to update a body's position and velocity, given the acceleration due to gravity on that body.
+
+##data.h && data.cpp
+These modules organize data for the Cuda functions. For example, it stores the acceleration, velocities and positions of each body in vectors for the updating of positions and velocities. These modules also have functions to use the results of the computations in GPU to update the position and velocity components of each Body.
+
+##bbox.h && bbox.cpp
+These modules defines a structure, Bbox, (which refers to the entire 2D space in which all the bodies are in, i.e. the bounding box) and has functions calculate the minimum and maximum x and y coordinates given the positions of all bodies, and also the coordinates of the centre of the box given the coordinates of the box.
+
+##saxpy.cu
+This module performs the calculation X + A * Y in GPU, where X and Y are vectors and A is scalar.
+
+##findMax.cu
+This module is a Cuda function that finds the maximum element within a vector. It is used to find the maximum x and y coordinates given the positions of all bodies to find the coordinates of the bounding box.
+
+##findMin.cu
+This module is a Cuda function that finds the minimum element within a vector. It is used to find the minimum x and y coordinates given the positions of all bodies to find the coordinates of the bounding box.
+
+#Tests
