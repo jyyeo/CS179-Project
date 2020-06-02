@@ -12,6 +12,7 @@ int main(void) {
 	arr = (float*)malloc(size * sizeof(float));
 	max_val = (float*)malloc(sizeof(float));
 
+	printf("CPU: ");
 	for (int i = 0; i < size; i++) {
 		arr[i] = (i + 1) * 1.5;
 		printf("%f ", arr[i]);
@@ -20,6 +21,7 @@ int main(void) {
 
  	cudaFindMax(arr, size, max_val);
 
+ 	printf("GPU: ");
  	for (int i = 0; i < size; i++) {
 		printf("%f ", arr[i]);
 	}
