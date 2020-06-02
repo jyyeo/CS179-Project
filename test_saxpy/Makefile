@@ -15,7 +15,7 @@ C_OBJS = $(addprefix out/,$(C_LIBS:=.o))
 
 all: saxpy
 
-saxpy: $(OBJS) $(C_OBJS) test_saxpy/main.cpp
+saxpy: $(C_OBJS) test_saxpy/main.cpp
 	$(CC) -o saxpy $^ $(CFLAGS) $(CPPFLAGS)
 
 # cpu: out/mechanics.o out/vector.o library/simulation_cpu.cpp
