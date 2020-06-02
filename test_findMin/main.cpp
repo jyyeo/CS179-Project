@@ -5,13 +5,14 @@
 #include "findMin.cuh"
 
 int main(void) {
-	int size = 5;
+	int size = 10;
 	float *arr;
 	float *min_val;
 
 	arr = (float*)malloc(size * sizeof(float));
 	min_val = (float*)malloc(sizeof(float));
 
+	printf("CPU: ");
 	for (int i = 0; i < size; i++) {
 		arr[i] = (size -i) * 1.5 - 7.5;
 		printf("%f ", arr[i]);
@@ -20,6 +21,7 @@ int main(void) {
 
  	cudaFindMin(arr, size, min_val);
 
+ 	printf("GPU: ");
  	for (int i = 0; i < size; i++) {
 		printf("%f ", arr[i]);
 	}
