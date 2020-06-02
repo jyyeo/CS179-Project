@@ -39,8 +39,7 @@ int	main(int argc, char const *argv[])
 	ifstream input_file;
 	input_file.open(argv[1]);
 	string input_filename;
-	getline(argv[1], input_filename, '.');
-	cout << input_filename << endl;
+	printf("%s\n", argv[1]);
 
 	// read data
 	string line;
