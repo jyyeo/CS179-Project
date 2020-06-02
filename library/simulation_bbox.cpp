@@ -38,8 +38,12 @@ int	main(int argc, char const *argv[])
 	// open file, while contains data
 	ifstream input_file;
 	input_file.open(argv[1]);
-	string input_filename;
+	
 	printf("%s\n", argv[1]);
+	istringstream input_filename(argv[1]);
+	string token;
+	getline(input_filename, token, '.');
+	printf("%s\n", token);
 
 	// read data
 	string line;
