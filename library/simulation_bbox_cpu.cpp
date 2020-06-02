@@ -163,6 +163,16 @@ int	main(int argc, char const *argv[])
 			acc[i].x = 0.0;
 			acc[i].y = 0.0;
 		}
+
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				vector_t total_acc = acc_on(bodies[i], bodies[j]);
+				acc[i].x += total_acc.x;
+				acc[i].y += total_acc.y;
+			}
+			// printf("debug: %f %f\n", acc[i].x, acc[i].y);
+		}
+
 		for (int i = 0; i < n; i++) {
 			updateBody(bodies[i], acc[i], timestep);
 		}
