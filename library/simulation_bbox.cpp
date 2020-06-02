@@ -80,7 +80,9 @@ int	main(int argc, char const *argv[])
 	ofstream output_file_gpu;
 	ofstream output_file_cpu;
 	string output_filename;
-	output_filename.append("output_gpu_", token.back(), ".txt");
+	string1 str = "output_gpu_";
+	str.append(token.back());
+	output_filename = str + ".txt";
 	// output_file_gpu.open("output_gpu.txt");
 	output_file_gpu.open(output_filename);
 	output_file_cpu.open("output_cpu.txt");
