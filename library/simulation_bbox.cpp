@@ -45,7 +45,7 @@ int	main(int argc, char const *argv[])
 	istringstream input_filename(argv[1]);
 	string token;
 	getline(input_filename, token, '.');
-	printf("%c\n", token.back());
+	printf("%s\n", to_string(token.back()));
 
 	// read data
 	string line;
@@ -79,7 +79,7 @@ int	main(int argc, char const *argv[])
 	input_file.close();
 	ofstream output_file_gpu;
 	ofstream output_file_cpu;
-	string output_filename = "output_gpu_" + token.back() + ".txt";
+	string output_filename = "output_gpu_" + ".txt";
 	output_file_gpu.open(output_filename);
 	output_file_cpu.open("output_cpu.txt");
 
