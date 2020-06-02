@@ -32,6 +32,9 @@ out/%.o: %.cu
 clean:
 	rm -f out/* bin/*
 
+test: saxpy
+	./saxpy
+
 # test: bins/gpu_run bins/cpu_run
 # 	./bins/gpu_run test_cases/test2.txt
 # 	echo "\n"
