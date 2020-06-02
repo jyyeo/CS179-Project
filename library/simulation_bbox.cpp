@@ -43,7 +43,8 @@ int	main(int argc, char const *argv[])
 	istringstream input_filename(argv[1]);
 	string token;
 	getline(input_filename, token, '.');
-	printf("%s\n", token);
+	printf("%c\n", token.back());
+
 
 	// read data
 	string line;
