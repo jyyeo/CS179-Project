@@ -18,7 +18,7 @@ all: cpu gpu
 gpu: $(OBJS) $(C_OBJS) library/simulation_bbox_gpu.cpp
 	$(CC) -o bins/gpu_run $^ $(CFLAGS) $(CPPFLAGS)
 
-cpu: out/mechanics.o out/vector.o library/simulation_bbox_cpu.cpp
+cpu: $(OBJS) $(C_OBJS) library/simulation_bbox_cpu.cpp
 	$(CC) -o bins/cpu_run $^ $(CPPFLAGS)
 
 libs: $(OBJS)
