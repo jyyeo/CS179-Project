@@ -143,7 +143,7 @@ int	main(int argc, char const *argv[])
 	 	float_arr[1] = to_string(*min_y);
 	 	float_arr[2] = to_string(*max_x);
 	 	float_arr[3] = to_string(*max_y);
-	 	string output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3];
+	 	output_line = float_arr[0] + " " + float_arr[1] + " " + float_arr[2] + " " + float_arr[3];
 	 	// cout << output_line << "\n";
 	 	output_file_gpu << output_line << "\n";
 
