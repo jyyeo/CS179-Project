@@ -16,7 +16,7 @@ C_OBJS = $(addprefix out/,$(C_LIBS:=.o))
 all: saxpy
 
 saxpy: $(C_OBJS) test_saxpy/main.cpp
-	$(CC) -o saxpy $^ $(CFLAGS) $(CPPFLAGS)
+	$(CC) -o test_saxpy $^ $(CFLAGS) $(CPPFLAGS)
 
 # cpu: out/mechanics.o out/vector.o library/simulation_cpu.cpp
 # 	$(CC) -o bins/cpu_run $^ $(CPPFLAGS)
@@ -37,4 +37,4 @@ clean:
 # 	echo "\n"
 # 	./bins/cpu_run test_cases/test2.txt
 
-.PHONY: all clean findMin
+.PHONY: all clean saxpy
