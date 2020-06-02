@@ -20,6 +20,7 @@
 using std::cerr;
 using std::string;
 using std::getline;
+using std::istringstream;
 using std::ifstream;
 using std::ofstream;
 using std::cout;
