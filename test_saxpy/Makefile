@@ -11,7 +11,7 @@ CFLAGS = -I$(CUDA_INC_PATH) -L$(CUDA_LIB_PATH) -lcudart
 # OBJS = $(addprefix out/,$(LIBS:=.o))
 
 C_LIBS = saxpy
-C_OBJS = $(addprefix out/,$(C_LIBS:=.o))
+C_OBJS = $(addprefix ,$(C_LIBS:=.o))
 
 all: saxpy
 
