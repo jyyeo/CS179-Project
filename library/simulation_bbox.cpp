@@ -79,13 +79,13 @@ int	main(int argc, char const *argv[])
 	input_file.close();
 	ofstream output_file_gpu;
 	ofstream output_file_cpu;
-	string output_filename = "output_gpu_" + to_string(token.back()) + ".txt";
+	string output_filename = "output_gpu_" + token.back() + ".txt";
 	output_file_gpu.open(output_filename);
 	output_file_cpu.open("output_cpu.txt");
 
 	for (int t = 0; t < timestep; t++) {
 
-	printf("timestep %d\n", t);
+		printf("timestep %d\n", t);
 
 	// calculate bounding boxes for each body (CPU)
 		Bbox boxes[n];
