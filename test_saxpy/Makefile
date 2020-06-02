@@ -1,5 +1,5 @@
 CC = g++
-CPPFLAGS = -Iinclude -Wall
+CPPFLAGS = -Wall
 
 CUDA_PATH       ?= /usr/local/cuda
 CUDA_INC_PATH   ?= $(CUDA_PATH)/include
@@ -23,8 +23,8 @@ saxpy: $(C_OBJS) test_saxpy/main.cpp
 
 # libs: $(OBJS)
 
-out/%.o: test_saxpy/%.cpp
-	$(CC) -c $(CPPFLAGS) -I$(CUDA_INC_PATH) $^ -o $@
+# out/%.o: test_saxpy/%.cpp
+# 	$(CC) -c $(CPPFLAGS) -I$(CUDA_INC_PATH) $^ -o $@
 
 out/%.o: test_saxpy/%.cu
 	nvcc -c $^ -o $@ -Iinclude
