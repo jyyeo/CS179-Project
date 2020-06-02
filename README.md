@@ -58,3 +58,26 @@ This module is a Cuda function that finds the maximum element within a vector. I
 This module is a Cuda function that finds the minimum element within a vector. It is used to find the minimum x and y coordinates given the positions of all bodies to find the coordinates of the bounding box.
 
 #Tests
+##saxpy.cu
+This module calculates X + A * Y in GPU. To test this module on its own, from the main directory, run:
+	cd test_saxpy
+	make test
+
+Expected output:
+CPU: 2.250000  4.750000  7.250000  9.750000  12.250000  14.750000  17.250000  19.750000  22.250000  24.750000
+GPU: 2.250000  4.750000  7.250000  9.750000  12.250000  14.750000  17.250000  19.750000  22.250000  24.750000
+
+##findMax.cu
+
+
+##findMin.cu
+This module finds the minimum element within a vector, using GPU. To test this module on its own, from the main directory, run:
+ 	cd test_findMin
+ 	make test
+
+Expected output:
+CPU: 7.500000 6.000000 4.500000 3.000000 1.500000 0.000000 -1.500000 -3.000000 -4.500000 -6.000000
+GPU: 7.500000 6.000000 4.500000 3.000000 1.500000 0.000000 -1.500000 -3.000000 -4.500000 -6.000000
+
+
+	

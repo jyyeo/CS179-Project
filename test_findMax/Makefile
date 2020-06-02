@@ -10,13 +10,13 @@ CFLAGS = -I$(CUDA_INC_PATH) -L$(CUDA_LIB_PATH) -lcudart
 # LIBS = vector mechanics data bbox
 # OBJS = $(addprefix out/,$(LIBS:=.o))
 
-C_LIBS = saxpy
+C_LIBS = findMax
 C_OBJS = $(addprefix ,$(C_LIBS:=.o))
 
-all: saxpy
+all: findMax
 
-saxpy: $(C_OBJS) main.cpp
-	$(CC) -o saxpy $^ $(CFLAGS) $(CPPFLAGS)
+findMax: $(C_OBJS) main.cpp
+	$(CC) -o findMax $^ $(CFLAGS) $(CPPFLAGS)
 
 # cpu: out/mechanics.o out/vector.o library/simulation_cpu.cpp
 # 	$(CC) -o bins/cpu_run $^ $(CPPFLAGS)
@@ -33,12 +33,12 @@ clean:
 	rm -f out/* bin/*
 	rm *.o
 
-test: saxpy
-	./saxpy
+test: findMax
+	./findMax
 
 # test: bins/gpu_run bins/cpu_run
 # 	./bins/gpu_run test_cases/test2.txt
 # 	echo "\n"
 # 	./bins/cpu_run test_cases/test2.txt
 
-.PHONY: all clean saxpy
+.PHONY: all clean findMax
