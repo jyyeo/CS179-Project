@@ -40,12 +40,12 @@ int	main(int argc, char const *argv[])
 	ifstream input_file;
 	input_file.open(argv[1]);
 	
+	// get test file number for output file name
 	printf("%s\n", argv[1]);
 	istringstream input_filename(argv[1]);
 	string token;
 	getline(input_filename, token, '.');
 	printf("%c\n", token.back());
-
 
 	// read data
 	string line;
@@ -75,13 +75,17 @@ int	main(int argc, char const *argv[])
 		bodies[i].mass = mass;
 	}
 
+	// close input file, open output file
 	input_file.close();
 	ofstream output_file_gpu;
 	ofstream output_file_cpu;
-	output_file_gpu.open("output_gpu.txt");
+	string output_filename = "output_gpu_" + to_string(token.back()) + ".txt";
+	output_file_gpu.open(output_filename);
 	output_file_cpu.open("output_cpu.txt");
 
 	for (int t = 0; t < timestep; t++) {
+
+	printf("timestep %d\n", t);
 
 	// calculate bounding boxes for each body (CPU)
 		Bbox boxes[n];
@@ -90,7 +94,7 @@ int	main(int argc, char const *argv[])
 		float min_y_cpu = get_min_y(bodies, n);
 		float max_y_cpu = get_max_y(bodies, n);
 
-		printf("CPU: %f %f %f %f\n", min_x_cpu, min_y_cpu, max_x_cpu, max_y_cpu);
+		// printf("CPU: %f %f %f %f\n", min_x_cpu, min_y_cpu, max_x_cpu, max_y_cpu);
 
 	// calculate bounding boxes for each body (GPU)
 		// organize data for GPU
@@ -117,7 +121,7 @@ int	main(int argc, char const *argv[])
 		cudaFindMin(position_y, n, min_y);
 		cudaFindMax(position_y, n, max_y);
 
-		printf("GPU: %f %f %f %f\n", *min_x, *min_y, *max_x, *max_y);
+		// printf("GPU: %f %f %f %f\n", *min_x, *min_y, *max_x, *max_y);
 
 		for (int i = 0; i < n; i++) {
 			boxes[i].bl = {*min_x, *min_y};
@@ -205,7 +209,6 @@ int	main(int argc, char const *argv[])
 		}
 		
 		output_file_gpu << "\n";
-		printf("timestep %d\n", t);
 	}	
 	output_file_gpu.close();
 	output_file_cpu.close();
