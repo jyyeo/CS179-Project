@@ -15,18 +15,18 @@ C_OBJS = $(addprefix out/,$(C_LIBS:=.o))
 
 all: saxpy
 
-saxpy: $(C_OBJS) test_saxpy/main.cpp
-	$(CC) -o test_saxpy $^ $(CFLAGS) $(CPPFLAGS)
+saxpy: $(C_OBJS) main.cpp
+	$(CC) -o saxpy $^ $(CFLAGS) $(CPPFLAGS)
 
 # cpu: out/mechanics.o out/vector.o library/simulation_cpu.cpp
 # 	$(CC) -o bins/cpu_run $^ $(CPPFLAGS)
 
 # libs: $(OBJS)
 
-# out/%.o: test_saxpy/%.cpp
+# out/%.o: %.cpp
 # 	$(CC) -c $(CPPFLAGS) -I$(CUDA_INC_PATH) $^ -o $@
 
-out/%.o: test_saxpy/%.cu
+out/%.o: %.cu
 	nvcc -c $^ -o $@ -Iinclude
 
 clean:
