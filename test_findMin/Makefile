@@ -15,7 +15,7 @@ C_OBJS = $(addprefix ,$(C_LIBS:=.o))
 
 all: findMin
 
-saxpy: $(C_OBJS) main.cpp
+findMin: $(C_OBJS) main.cpp
 	$(CC) -o findMin $^ $(CFLAGS) $(CPPFLAGS)
 
 # cpu: out/mechanics.o out/vector.o library/simulation_cpu.cpp
@@ -31,6 +31,7 @@ out/%.o: %.cu
 
 clean:
 	rm -f out/* bin/*
+	rm *.o
 
 test: findMin
 	./findMin
