@@ -62,7 +62,6 @@ int	main(int argc, char const *argv[])
 		getline(input_file, line);
 		std::stringstream  lineStream(line);
 
-		// should be 8
 		float num[5];
 		for (int j = 0; j < 5; j++) {
 			lineStream >> num[j];
@@ -80,10 +79,8 @@ int	main(int argc, char const *argv[])
 	input_file.close();
 	ofstream output_file_gpu;
 	ofstream output_file_cpu;
-	string output_filename;
-	string str = "output_gpu_";
-	str.append(file_num);
-	output_filename = str + ".txt";
+	string output_filename = "output_gpu__.txt";
+	output_filename[11] = file_num;
 	// output_file_gpu.open("output_gpu.txt");
 	output_file_gpu.open(output_filename);
 	output_file_cpu.open("output_cpu.txt");
