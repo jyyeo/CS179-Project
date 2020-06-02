@@ -19,7 +19,7 @@ gpu: $(OBJS) $(C_OBJS) library/simulation_bbox_gpu.cpp
 	$(CC) -o bins/gpu_run $^ $(CFLAGS) $(CPPFLAGS)
 
 cpu: $(OBJS) $(C_OBJS) library/simulation_bbox_cpu.cpp
-	$(CC) -o bins/cpu_run $^ $(CPPFLAGS)
+	$(CC) -o bins/cpu_run $^ $(CFLAGS) $(CPPFLAGS)
 
 libs: $(OBJS)
 
