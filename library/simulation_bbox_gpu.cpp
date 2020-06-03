@@ -88,7 +88,7 @@ int	main(int argc, char const *argv[])
 
 	for (int t = 0; t < timestep; t++) {
 
-		printf("timestep %d\n", t);
+		// printf("timestep %d\n", t);
 		output_file_gpu << t << "\n";
 
 		Bbox boxes[n];
