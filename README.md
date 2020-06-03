@@ -86,5 +86,14 @@ GPU: 7.500000 6.000000 4.500000 3.000000 1.500000 0.000000 -1.500000 -3.000000 -
 completed
 -6.000000
 
+## Compare CPU and GPU implementation
+To run all test cases:
+	make clean all
+	./demo_project.sh
 
+To run any single test cases (out of 5) using CPU implementation:
+	./bins/cpu_run test_cases/test1.txt 
+
+To run any single test cases (out of 5) using GPU implementation:
+	./bins/gpu_run test_cases/test1.txt 
 	
