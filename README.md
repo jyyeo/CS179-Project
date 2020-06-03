@@ -97,3 +97,10 @@ To run any single test cases (out of 5) using CPU implementation:
 To run any single test cases (out of 5) using GPU implementation:
 	./bins/gpu_run test_cases/test1.txt 
 	
+Each run output a .txt file with the coordinates of the bounding boxes and the stats (position and velocity) of each body at each time step. For example, running test_cases/test2.txt using the GPU implementation will result in a output_2_gpu.txt that has the following for each time step:
+	time step
+	x-position y-position x-velocity y-velocity mass
+	x-position y-position x-velocity y-velocity mass
+	...
+where each line after time step is for each body.
+
